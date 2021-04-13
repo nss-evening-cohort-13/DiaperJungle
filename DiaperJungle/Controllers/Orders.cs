@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DiaperJungle.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Orders")]
     [ApiController]
     public class Orders : ControllerBase
     {
