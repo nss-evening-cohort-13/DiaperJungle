@@ -22,5 +22,18 @@ namespace DiaperJungle.DataAccess
             var results = db.Query<User>(sql).ToList();
             return results;
         }
+
+        public User Get(int id)
+        {
+            var sql = @"SELECT *
+                        FROM [User]
+                        WHERE id = @id";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var singleUser = db.QueryFirstOrDefault<User>(sql, new { id = id });
+
+            return singleUser;
+        }
     }
 }
