@@ -54,5 +54,24 @@ namespace DiaperJungle.Controllers
             _repo.Remove(userId);
             return Ok();
         }
+
+        //PUT to /api/loaves/{id}/slice
+        //PUT to /api/loaves/4/slice
+        [HttpPut("{id}/update")]
+        public IActionResult UpdateUser(int id, User userObj)
+        {
+            //Option 1:
+            //less efficient
+            var user = _repo.Get(id);
+
+            user.first_name = userObj.first_name;
+            user.last_name = userObj.last_name;
+            user.username = userObj.username;
+            user.password = userObj.password;
+            user.is_admin = userObj.is_admin;
+
+            _repo.Update(user);
+            return NoContent();
+        }
     }
 }

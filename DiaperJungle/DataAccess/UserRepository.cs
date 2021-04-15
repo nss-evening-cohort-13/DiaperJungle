@@ -59,5 +59,20 @@ namespace DiaperJungle.DataAccess
 
             db.Execute(sql, new { id });
         }
+
+        public void Update(User user)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"UPDATE [User]
+                        SET first_name = @first_name,
+                            last_name = @last_name,
+	                        username = @username,
+	                        password = @password,
+	                        is_admin = @is_admin
+                        WHERE id = @id";
+
+            db.Execute(sql, user);
+        }
     }
 }
