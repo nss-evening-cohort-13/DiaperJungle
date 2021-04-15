@@ -60,8 +60,6 @@ namespace DiaperJungle.Controllers
         [HttpPut("{id}/update")]
         public IActionResult UpdateUser(int id, User userObj)
         {
-            //Option 1:
-            //less efficient
             var user = _repo.Get(id);
 
             user.first_name = userObj.first_name;
