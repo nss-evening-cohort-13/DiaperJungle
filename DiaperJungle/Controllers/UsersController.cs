@@ -18,6 +18,7 @@ namespace DiaperJungle.Controllers
         {
             _repo = new UserRepository();
         }
+
         //Get to api/users
         [HttpGet]
         public IActionResult GetAllUsers()
@@ -38,6 +39,20 @@ namespace DiaperJungle.Controllers
             return Ok(user);
         }
 
+        //POST to /api/users
+        [HttpPost]
+        public IActionResult AddAUser(User user)
+        {
+            _repo.Add(user);
+            return Created($"api/Loaves/{user.id}", user);
+        }
 
+        //DELETE to /api/users/{userId}
+        [HttpDelete("{userId}")]
+        public IActionResult DeleteUser(int userId)
+        {
+            _repo.Remove(userId);
+            return Ok();
+        }
     }
 }
