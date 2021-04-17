@@ -9,7 +9,7 @@ using DiaperJungle.DataAccess;
 
 namespace DiaperJungle.Controllers
 {
-    [Route("api/users")]
+    [Route("api/Users")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -19,15 +19,15 @@ namespace DiaperJungle.Controllers
             _repo = new UserRepository();
         }
 
-        //Get to api/users
+        //Get to api/Users
         [HttpGet]
         public IActionResult GetAllUsers()
         {
             return Ok(_repo.GetAll());
         }
 
-        //GET to /api/users/{id}
-        //GET to /api/users/4
+        //GET to /api/Users/{id}
+        //GET to /api/Users/4
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -39,7 +39,7 @@ namespace DiaperJungle.Controllers
             return Ok(user);
         }
 
-        //POST to /api/users
+        //POST to /api/Users
         [HttpPost]
         public IActionResult AddAUser(User user)
         {
@@ -47,7 +47,7 @@ namespace DiaperJungle.Controllers
             return Created($"api/Loaves/{user.id}", user);
         }
 
-        //DELETE to /api/users/{userId}
+        //DELETE to /api/Users/{userId}
         [HttpDelete("{userId}")]
         public IActionResult DeleteUser(int userId)
         {
@@ -55,8 +55,7 @@ namespace DiaperJungle.Controllers
             return Ok();
         }
 
-        //PUT to /api/loaves/{id}/slice
-        //PUT to /api/loaves/4/slice
+        //PUT to /api/User/{id}/update
         [HttpPut("{id}/update")]
         public IActionResult UpdateUser(int id, User userObj)
         {

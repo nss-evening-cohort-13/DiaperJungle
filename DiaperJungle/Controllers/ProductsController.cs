@@ -9,19 +9,19 @@ using DiaperJungle.Models;
 
 namespace DiaperJungle.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Products")]
     [ApiController]
-    public class Products : ControllerBase
+    public class ProductsController : ControllerBase
     {
         ProductRepository _repo;
 
-        public Products()
+        public ProductsController()
         {
             _repo = new ProductRepository();
         }
 
         
-        //GET to /api/products
+        //GET to /api/Products
         [HttpGet]
         public IActionResult GetAllProducts()
         {
@@ -29,7 +29,7 @@ namespace DiaperJungle.Controllers
         }
 
 
-        //GET to /api/products/{id}
+        //GET to /api/Products/{id}
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -43,7 +43,7 @@ namespace DiaperJungle.Controllers
             return Ok(product);
         }
 
-        //POST to /api/products
+        //POST to /api/Products
         [HttpPost]
         public IActionResult AddAProduct(Product product)
         {
@@ -52,6 +52,7 @@ namespace DiaperJungle.Controllers
         }
 
         
+        //PUT to /api/{productsId}/update
         [HttpPut("{id}/update")]
         public IActionResult UpdateUser(int id, Product productObj)
         {
@@ -67,7 +68,7 @@ namespace DiaperJungle.Controllers
             return NoContent();
         }
 
-        //DELETE /api/products/{productId}
+        //DELETE /api/Products/{productId}
         [HttpDelete("{productId}")]
         public IActionResult RemoveProduct(int productId)
         {

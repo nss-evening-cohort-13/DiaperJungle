@@ -19,13 +19,15 @@ namespace DiaperJungle.Controllers
         {
             _repo = new ProductTypeRepository();
         }
-        //get all
+
+        //GET to /api/ProductTypes
         [HttpGet]
         public IActionResult GetAllProductTypes()
         {
             return Ok(_repo.GetAll());
         }
-        //get single
+
+        //GET to /api/ProductTypes/{id}
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -39,7 +41,7 @@ namespace DiaperJungle.Controllers
             return Ok(productType);
         }
 
-        //post
+        //POST to /api/ProductsTypes
         [HttpPost]
         public IActionResult AddAProductType(ProductType productType)
         {
@@ -47,7 +49,7 @@ namespace DiaperJungle.Controllers
             return Created($"api/ProductTypes/{productType.id}", productType);
         }
 
-        //delete
+        //DELETE /api/ProductType/{ProductTypesId}
         [HttpDelete("{productTypeId}")]
         public IActionResult DeleteProductType(int productTypeId)
         {
@@ -56,7 +58,7 @@ namespace DiaperJungle.Controllers
             return Ok();
         }
 
-        //update
+        //PUT to /api/{ProductTypesId}/update
         [HttpPut("{id}/update")]
         public IActionResult UpdateProductType(int id, ProductType newCategory)
         {

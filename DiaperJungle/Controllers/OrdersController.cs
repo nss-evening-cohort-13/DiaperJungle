@@ -50,6 +50,7 @@ namespace DiaperJungle.Controllers
             return Ok(order);
         }
 
+        //Delete to /api/orders/{id}
         [HttpDelete("{orderId}")]
         public IActionResult DeleteOrder(int orderId)
         {
