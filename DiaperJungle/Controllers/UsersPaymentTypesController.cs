@@ -20,14 +20,14 @@ namespace DiaperJungle.Controllers
             _repo = new UserPaymentTypeRepository();
         }
 
-        //GET to /api/orders
+        //GET to /api/userspaymenttypes
         [HttpGet]
         public IActionResult GetAllUserPaymentTypes()
         {
             return Ok(_repo.GetAll());
         }
 
-        //GET to /api/orders/{id}
+        //GET to /api/userspaymenttypes/{id}
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {

@@ -12,7 +12,7 @@ namespace DiaperJungle.DataAccess
     {
         const string ConnectionString = "Server=localhost;Database=DiaperJungle;Trusted_Connection=True;";
 
-        //Get all product_types
+        //Get all userspaymenttypes
         public List<UserPaymentType> GetAll()
         {
             using var db = new SqlConnection(ConnectionString);
@@ -23,7 +23,7 @@ namespace DiaperJungle.DataAccess
             return db.Query<UserPaymentType>(sql).ToList();
         }
 
-        //Get single product_type
+        //Get single userspaymenttypes
         public UserPaymentType Get(int id)
         {
             using var db = new SqlConnection(ConnectionString);
