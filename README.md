@@ -5,7 +5,7 @@ We make diapers for animals. What's left to say?
 
 # ERD
 
-![image](https://user-images.githubusercontent.com/67588177/114889369-aeb7bc00-9dcf-11eb-8857-eff44cdd8da8.png)
+![image](https://user-images.githubusercontent.com/67588177/115118082-31bf4a80-9f67-11eb-9700-547ebb0dca57.png)
 
 # Figma Wireframe
 
