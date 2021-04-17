@@ -9,7 +9,7 @@ namespace DiaperJungle.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PaymentTypes : ControllerBase
+    public class PaymentTypesController : ControllerBase
     {
     }
 }
