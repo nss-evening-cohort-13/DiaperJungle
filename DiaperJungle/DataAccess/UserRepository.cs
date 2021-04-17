@@ -12,6 +12,7 @@ namespace DiaperJungle.DataAccess
     {
         const string ConnectionString = "Server=localhost;Database=DiaperJungle;Trusted_Connection=True;";
 
+        //Gets all users
         public List<User> GetAll()
         {
             using var db = new SqlConnection(ConnectionString);
@@ -23,6 +24,7 @@ namespace DiaperJungle.DataAccess
             return results;
         }
 
+        //Gets a single user
         public User Get(int id)
         {
             var sql = @"SELECT *
@@ -36,6 +38,7 @@ namespace DiaperJungle.DataAccess
             return singleUser;
         }
 
+        //Adds a user
         public void Add(User user)
         {
             var sql = @"INSERT INTO [dbo].[User] ([first_name], [last_name], [date_created], [username], [password], [is_admin])
@@ -49,6 +52,7 @@ namespace DiaperJungle.DataAccess
             user.id = id;
         }
 
+        //Removes a user
         public void Remove(int id)
         {
             using var db = new SqlConnection(ConnectionString);
@@ -60,6 +64,7 @@ namespace DiaperJungle.DataAccess
             db.Execute(sql, new { id });
         }
 
+        //updates a user
         public void Update(User user)
         {
             using var db = new SqlConnection(ConnectionString);
