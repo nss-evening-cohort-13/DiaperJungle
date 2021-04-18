@@ -36,18 +36,24 @@ namespace DiaperJungle.DataAccess
             return singlePayType;
         }
 
-        public void Add(PaymentType paymentType, User user)
+        public List<PaymentType> GetUserPayments(int user_id)
         {
-            var sql = @"DECLARE @paymentTypeId TABLE (id int)
+            using var db = new SqlConnection(ConnectionString);
 
-                        INSERT INTO [dbo].[Payment_Type] ([pay_type], [account_number])
-                        OUTPUT inserted.id INTO @paymentTypeId
-                        VALUES(@pay_type, @account_number)
+            var sql = @"SELECT *
+                        FROM Payment_Type
+                        WHERE Payment_Type.user_id = @user_id";
 
-                        DECLARE @id int = (SELECT TOP 1 id FROM @paymentTypeId)
+            var payment = db.Query<PaymentType>(sql, new { user_id = user_id }).ToList();
 
-                        INSERT INTO [dbo].[User_Payment_Type] ([user_id], [payment_type_id])
-                        VALUES (@user_id, @id)";
+            return payment;
+        }
+
+        public void Add(PaymentType paymentType)
+        {
+            var sql = @"INSERT INTO [dbo].[Payment_Type] ([pay_type], [account_number], [user_id])
+                        OUTPUT inserted.id
+                        VALUES(@pay_type, @account_number, @user_id)";
 
             using var db = new SqlConnection(ConnectionString);
 

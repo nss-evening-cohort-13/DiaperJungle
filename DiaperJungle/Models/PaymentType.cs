@@ -10,5 +10,6 @@ namespace DiaperJungle.Models
         public int id { get; set; }
         public string pay_type { get; set; }
         public int account_number { get; set; }
+        public int user_id { get; set; }
     }
 }
