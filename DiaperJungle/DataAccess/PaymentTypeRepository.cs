@@ -61,5 +61,16 @@ namespace DiaperJungle.DataAccess
 
             paymentType.id = id;
         }
+
+        public void Remove(int id)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"DELETE
+                        FROM Payment_Type
+                        WHERE id = @id";
+
+            db.Execute(sql, new { id });
+        }
     }
 }

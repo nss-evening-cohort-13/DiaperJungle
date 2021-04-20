@@ -47,6 +47,8 @@ namespace DiaperJungle.Controllers
             return Created($"api/PaymentTypes/{paymentType.id}", paymentType);
         }
 
+        //GET User payment types
+        //GET URL /api/userPayments/6
         [HttpGet("userPayments/{user_id}")]
         public IActionResult GetUserPaymentTypes(int user_id)
         {
@@ -58,9 +60,12 @@ namespace DiaperJungle.Controllers
             return Ok(payment);
         }
 
-
-
-
-
+        //DELETE to /api/PaymentType/{payment_id}
+        [HttpDelete("{payment_id}")]
+        public IActionResult DeletePaymentType(int payment_id)
+        {
+            _repo.Remove(payment_id);
+            return Ok();
+        }
     }
 }
