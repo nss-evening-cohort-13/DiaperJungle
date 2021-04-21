@@ -28,7 +28,7 @@ namespace DiaperJungle.DataAccess
         public void Add(Order order)
         {
             var sql = @"INSERT INTO [Orders] ([pay_type], [total_cost], [user_id])
-                        OUTPUT INSERTED.id
+                        OUTPUT INSERTED.id 
                         VALUES(@pay_type, @total_cost, @user_id)";
 
             using var db = new SqlConnection(ConnectionString);
