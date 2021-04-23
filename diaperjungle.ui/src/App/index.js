@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.scss';
 import { BrowserRouter } from 'react-router-dom';
+import './App.scss';
 import Routes from '../helpers/routes';
 
 function App() {
