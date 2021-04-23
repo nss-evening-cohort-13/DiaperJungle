@@ -8,16 +8,16 @@ import {
   NavItem,
   NavbarText,
 } from 'reactstrap';
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
 import 'firebase/auth';
 import { Link } from 'react-router-dom';
 
 // pass user as parameter when user auth is setup
 const MyNavbar = () => {
-  const logMeOut = (e) => {
-    e.preventDefault();
-    firebase.auth().signOut();
-  };
+  // const logMeOut = (e) => {
+  //   e.preventDefault();
+  //   firebase.auth().signOut();
+  // };
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -37,13 +37,19 @@ const MyNavbar = () => {
               <Link to='/orders' className="nav-link m-2" href="#">Orders</Link>
             </NavItem>
             <NavItem>
+              <Link to='/users' className="nav-link m-2" href="#">Users</Link>
+            </NavItem>
+            <NavItem>
+              <Link to='/producttypes' className="nav-link m-2" href="#">Product Types</Link>
+            </NavItem>
+            <NavItem>
               <Link to='/cart' className="nav-link m-2" href="#">Cart</Link>
             </NavItem>
           </Nav>
           <NavbarText>
-            <div className="form-inline my-2 my-lg-0">
+            {/* <div className="form-inline my-2 my-lg-0">
                   <button className="nav-link btn btn-outline-primary" onClick={logMeOut}>Logout</button>
-            </div>
+            </div> */}
             {/* for when the user auth is setup use commented code below */}
             {/* <div className="form-inline my-2 my-lg-0">
                 {user && (
