@@ -1,18 +1,12 @@
 import React from 'react';
-import {
-  Card, Button, CardTitle, CardText, Row, Col
-} from 'reactstrap';
 
-const ProductCard = ({ allProducts }) => (
-    <Row>
-      <Col sm="6">
-        <Card body>
-          <CardTitle tag="h5">{allProducts.title}</CardTitle>
-          <CardText>{allProducts.description}</CardText>
-          <Button>Go somewhere</Button>
-        </Card>
-      </Col>
-    </Row>
-);
-
-export default ProductCard;
+export default function ProductCard({ allProducts }) {
+  return (
+    <div className='card m-2'>
+      <h5 className='card-title'>{allProducts.title}</h5>
+      <div className='card-body'>
+        <p className='card-text'>{allProducts.description}</p>
+      </div>
+    </div>
+  );
+}
