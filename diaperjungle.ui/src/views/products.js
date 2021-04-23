@@ -1,5 +1,6 @@
 import React from 'react';
 import productData from '../helpers/data/productData';
+// import ProductCard from '../components/productCard';
 
 class Products extends React.Component {
     state = {
@@ -28,7 +29,9 @@ class Products extends React.Component {
              </div>);
 
       const cards = products.map(productCard);
-      // console.warn('cards', cards);
+      // const cards = () => products.map((allProducts) => (
+      //   <ProductCard key={allProducts.id} allProducts={allProducts} />
+      // ));
 
       return (
             <>
