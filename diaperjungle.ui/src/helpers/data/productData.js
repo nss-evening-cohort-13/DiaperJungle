@@ -10,4 +10,14 @@ const getAllProducts = () => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export default { getAllProducts };
+const getSingleProduct = (Id) => new Promise((resolve, reject) => {
+  axios.get(`${productUrl}/${Id}`)
+    .then((response) => {
+      resolve(response.data);
+    })
+    .catch((error) => reject(error));
+});
+
+const deleteProducts = (Id) => axios.delete(`${productUrl}/${Id}`);
+
+export default { getAllProducts, getSingleProduct, deleteProducts };

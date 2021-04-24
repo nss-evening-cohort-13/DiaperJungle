@@ -4,6 +4,7 @@ import Orders from '../views/orders';
 import Products from '../views/products';
 import Users from '../views/users';
 import ProductTypes from '../views/productTypes';
+import ProductDetails from '../views/productDetails';
 
 export default function Routes() {
   return (
@@ -12,6 +13,7 @@ export default function Routes() {
             <Route exact path="/users" component={Users} />
             <Route exact path='/products' component={Products} />
             <Route exact path='/producttypes' component={ProductTypes}/>
+            <Route exact path='/products/:id' component={ProductDetails}/>
         </Switch>
   );
 }

@@ -27,9 +27,9 @@ namespace DiaperJungle.DataAccess
         //Adds an order
         public void Add(Order order)
         {
-            var sql = @"INSERT INTO [Orders] ([pay_type], [total_cost], [user_id])
+            var sql = @"INSERT INTO [Orders] ([pay_type], [total_cost], [user_id], [is_complete])
                         OUTPUT INSERTED.id 
-                        VALUES(@pay_type, @total_cost, @user_id)";
+                        VALUES(@pay_type, @total_cost, @user_id, @is_complete)";
 
             using var db = new SqlConnection(ConnectionString);
             var orderId = db.ExecuteScalar<int>(sql, order);
@@ -70,6 +70,5 @@ namespace DiaperJungle.DataAccess
 
             db.Execute(sql, new { id });
         }
-
     }
 }
