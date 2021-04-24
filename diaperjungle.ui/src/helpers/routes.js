@@ -15,7 +15,7 @@ export default function Routes() {
             <Route exact path='/products' component={Products} />
             <Route exact path='/producttypes' component={ProductTypes}/>
             <Route exact path='/products/:id' component={ProductDetails}/>
-            <Route exact path='/product-form' component={ProductForm}/>
+            <Route exact path='/product-form' component={(props) => <ProductForm {...props} />}/>
         </Switch>
   );
 }
