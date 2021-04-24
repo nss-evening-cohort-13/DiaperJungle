@@ -49,6 +49,7 @@ class Products extends React.Component {
       return (
             <>
             <h2>Products</h2>
+            <Link className='btn btn-dark' to={'product-form'}>Add a Product</Link>
             <div>{cards}</div>
             </>
       );
