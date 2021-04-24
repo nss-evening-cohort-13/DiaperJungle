@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, Input } from 'reactstrap';
+import productData from '../helpers/data/productData';
 
 class ProductForm extends Component {
     state = {
@@ -9,15 +10,26 @@ class ProductForm extends Component {
     //   title: this.props.product.title || '',
     //   description: this.props.product.description || '',
     //   quantity: this.props.product.quantity || ''
-      id: 2,
+    }
+
+    handleChange = (e) => {
+      this.setState({
+        [e.target.name]: '',
+      });
+    }
+
+    handleSubmit = (e) => {
+      e.preventDefault();
+      productData.addProduct(this.state);
     }
 
     render() {
-      const dataItems = ['price', 'title', 'description', 'quantity'];
+      const dataItems = ['type_id', 'price', 'title', 'description', 'quantity'];
       return (
             <>
             <h2>Add A Product</h2>
-            <Form className='container mb-3'>
+            <h5>TypeId is a number 1 to 5</h5>
+            <Form className='container mb-3' onSubmit={this.handleSubmit}>
                 {
                     dataItems.map((item) => (
                         <Input

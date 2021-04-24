@@ -18,6 +18,14 @@ const getSingleProduct = (Id) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const addProduct = (Obj) => new Promise((resolve, reject) => {
+  axios.post(`${productUrl}`, Obj).then((response) => {
+    resolve(response);
+  }).catch((error) => reject(error));
+});
+
 const deleteProducts = (Id) => axios.delete(`${productUrl}/${Id}`);
 
-export default { getAllProducts, getSingleProduct, deleteProducts };
+export default {
+  getAllProducts, getSingleProduct, addProduct, deleteProducts
+};
