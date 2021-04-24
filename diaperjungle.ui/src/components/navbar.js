@@ -11,6 +11,7 @@ import {
 // import firebase from 'firebase/app';
 import 'firebase/auth';
 import { Link } from 'react-router-dom';
+import SearchInput from './searchInput';
 
 // pass user as parameter when user auth is setup
 const MyNavbar = () => {
@@ -46,6 +47,8 @@ const MyNavbar = () => {
               <Link to='/cart' className="nav-link m-2" href="#">Cart</Link>
             </NavItem>
           </Nav>
+          <p className='mr-2 mt-3 text-light'>Search:</p>
+            <SearchInput />
           <NavbarText>
             {/* <div className="form-inline my-2 my-lg-0">
                   <button className="nav-link btn btn-outline-primary" onClick={logMeOut}>Logout</button>
