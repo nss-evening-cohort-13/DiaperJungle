@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import productData from '../helpers/data/productData';
+// import ProductCard from '../components/productCard';
 
 class Products extends React.Component {
     state = {
@@ -8,6 +10,12 @@ class Products extends React.Component {
 
     componentDidMount() {
       this.getAllOfTheProducts();
+    }
+
+    handleChange = (e) => {
+      this.setState({
+        [e.target.name]: e.target.value,
+      });
     }
 
     getAllOfTheProducts = () => {
@@ -20,20 +28,28 @@ class Products extends React.Component {
 
     render() {
       const { products } = this.state;
-      console.warn('products', products);
+      console.warn('products in render', products);
 
       const productCard = (product) => (
-             <div>
-                 {product.title}
-             </div>);
+        <div className='product-card'>
+        <div className='card m-2'>
+          <h5 className='card-title'>{product.title}</h5>
+          <div className='card-body'>
+          <p className='card-text'>{product.description}</p>
+          </div>
+          <Link className='btn btn-primary' to={`/products/${product.id}`}>Product Details</Link>{' '}
+        </div>
+        </div>);
 
       const cards = products.map(productCard);
-      // console.warn('cards', cards);
+      // const cards = () => products.map((allProducts) => (
+      //   <ProductCard key={allProducts.id} allProducts={allProducts} />
+      // ));
 
       return (
             <>
             <h2>Products</h2>
-            {cards}
+            <div>{cards}</div>
             </>
       );
     }

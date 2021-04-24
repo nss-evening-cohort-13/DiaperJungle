@@ -1,27 +1,12 @@
-/* import React from 'react';
-import {
-  Card, Button, CardTitle, CardText, Row, Col
-} from 'reactstrap';
+import React from 'react';
 
-const Example = (props) => {
+export default function ProductCard({ allProducts }) {
   return (
-    <Row>
-      <Col sm="6">
-        <Card body>
-          <CardTitle tag="h5">Special Title Treatment</CardTitle>
-          <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-          <Button>Go somewhere</Button>
-        </Card>
-      </Col>
-      <Col sm="6">
-        <Card body>
-          <CardTitle tag="h5">Special Title Treatment</CardTitle>
-          <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-          <Button>Go somewhere</Button>
-        </Card>
-      </Col>
-    </Row>
+    <div className='card m-2'>
+      <h5 className='card-title'>{allProducts.title}</h5>
+      <div className='card-body'>
+        <p className='card-text'>{allProducts.description}</p>
+      </div>
+    </div>
   );
-};
-
-export default Example; */
+}
