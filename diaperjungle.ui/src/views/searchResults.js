@@ -35,8 +35,9 @@ class SearchResults extends Component {
 
     // const showResults = () => results.map((result) => <ProductCard key={result.id} product={result} />);
     const productCard = (product) => (
-      <div className='product-card'>
+      <div className='product-card' style= {{ width: '500px' }}>
       <div className='card m-2'>
+      <img src={product.image_url} alt=''></img>
         <h5 className='card-title'>{product.title}</h5>
         <div className='card-body'>
         <p className='card-text'>{product.description}</p>
