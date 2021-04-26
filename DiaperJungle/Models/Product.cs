@@ -15,7 +15,6 @@ namespace DiaperJungle.Models
             public string title { get; set; }
             public string description { get; set; }
             public int quantity { get; set; }
-        
-
+            public string image_url { get; set; }
     }
 }

@@ -20,4 +20,15 @@ const getSingleProduct = (Id) => new Promise((resolve, reject) => {
 
 const deleteProducts = (Id) => axios.delete(`${productUrl}/${Id}`);
 
-export default { getAllProducts, getSingleProduct, deleteProducts };
+const getSearchedProducts = (searchTerm) => new Promise((resolve, reject) => axios
+  .get(`${productUrl}`).then((response) => {
+    const searched = response.data.filter((product) => product.title.toLowerCase().includes(searchTerm));
+    resolve(searched);
+  }).catch((error) => reject(error)));
+
+export default {
+  getAllProducts,
+  getSingleProduct,
+  deleteProducts,
+  getSearchedProducts
+};

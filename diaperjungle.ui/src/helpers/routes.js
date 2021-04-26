@@ -5,6 +5,7 @@ import Products from '../views/products';
 import Users from '../views/users';
 import ProductTypes from '../views/productTypes';
 import ProductDetails from '../views/productDetails';
+import SearchResults from '../views/searchResults';
 import ordersSingleDetail from '../views/ordersSingleDetails';
 
 export default function Routes() {
@@ -15,6 +16,7 @@ export default function Routes() {
             <Route exact path='/products' component={Products} />
             <Route exact path='/producttypes' component={ProductTypes}/>
             <Route exact path='/products/:id' component={ProductDetails}/>
+            <Route exact path='/search/:term' component={(props) => <SearchResults {...props}/>} />
             <Route exact path='/orders/:id' component={ordersSingleDetail}/>
         </Switch>
   );
