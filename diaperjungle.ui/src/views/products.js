@@ -29,10 +29,10 @@ class Products extends React.Component {
     render() {
       const { products } = this.state;
       console.warn('products in render', products);
-
       const productCard = (product) => (
-        <div className='product-card'>
+        <div className='product-card' style= {{ width: '500px' }}>
         <div className='card m-2'>
+          <img src={product.image_url} alt=''></img>
           <h5 className='card-title'>{product.title}</h5>
           <div className='card-body'>
           <p className='card-text'>{product.description}</p>
@@ -40,20 +40,16 @@ class Products extends React.Component {
           <Link className='btn btn-primary' to={`/products/${product.id}`}>Product Details</Link>{' '}
         </div>
         </div>);
-
       const cards = products.map(productCard);
       // const cards = () => products.map((allProducts) => (
       //   <ProductCard key={allProducts.id} allProducts={allProducts} />
       // ));
-
       return (
             <>
             <h2>Products</h2>
-            <Link className='btn btn-dark' to={'product-form'}>Add a Product</Link>
             <div>{cards}</div>
             </>
       );
     }
 }
-
 export default Products;
