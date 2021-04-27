@@ -21,13 +21,9 @@ const getSingleProduct = (Id) => new Promise((resolve, reject) => {
 const deleteProducts = (Id) => axios.delete(`${productUrl}/${Id}`);
 
 const addProduct = (data) => new Promise((resolve, reject) => {
-  axios.post(`${baseUrl}/gear.json`, data)
+  axios.post(`${productUrl}`, data)
     .then((response) => {
-      const update = { firebaseKey: response.data.name };
-      axios.patch(`${baseUrl}/gear/${response.data.name}.json`, update)
-        .then(() => {
-          resolve(response);
-        });
+      resolve(response.data);
     }).catch((error) => reject(error));
 });
 
