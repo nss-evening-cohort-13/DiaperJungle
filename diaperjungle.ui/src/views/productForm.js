@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Form, Input } from 'reactstrap';
+import {
+  Button, Form, Input, InputGroup, InputGroupAddon
+} from 'reactstrap';
 import productData from '../helpers/data/productData';
 
 class ProductForm extends Component {
@@ -24,27 +26,75 @@ class ProductForm extends Component {
     }
 
     render() {
-      const dataItems = ['type_id', 'price', 'title', 'description', 'quantity'];
+      // const dataItems = ['type_id', 'price', 'title', 'description', 'quantity'];
       return (
             <>
             <h2>Add A Product</h2>
             <h5>TypeId is a number 1 to 5</h5>
             <Form className='container mb-3' onSubmit={this.handleSubmit}>
-                {
-                    dataItems.map((item) => (
-                        <Input
-                        key={item}
-                        className='mb-2'
-                        type='text'
-                        name={item}
-                        id={item}
-                        value={this.state[`${item}`]}
-                        placeholder={`Enter ${item}`}
-                        onChange={this.handleChange}
-                        required
-                   />
-                    ))
-                }
+              <InputGroup size='lg'>
+                <Input
+                type='number'
+                value={this.state.type_id}
+                min={0} max={5}
+                placeholder='1 - 5'
+                onChange={this.handleChange}
+                required
+                />
+                <InputGroupAddon addonType="append">Type ID</InputGroupAddon>
+              </InputGroup>
+              <br />
+              <InputGroup size='lg'>
+                <Input
+                type='number'
+                value={this.state.price}
+                min={0} max={10000}
+                onChange={this.handleChange}
+                required
+                />
+                <InputGroupAddon addonType="append">$</InputGroupAddon>
+              </InputGroup>
+              <br />
+              <InputGroup size='lg'>
+                <Input
+                type='text'
+                value={this.state.title}
+                onChange={this.handleChange}
+                required
+                />
+                <InputGroupAddon addonType="append">Title</InputGroupAddon>
+              </InputGroup>
+              <br />
+              <InputGroup size='lg'>
+                <Input
+                type='text'
+                value={this.state.description}
+                />
+                <InputGroupAddon addonType="append">Descripton</InputGroupAddon>
+              </InputGroup>
+              <br />
+              <InputGroup size='lg'>
+                <Input
+                type='number'
+                value={this.state.type_id}
+                min={0} max={1000}
+                onChange={this.handleChange}
+                required
+                />
+                <InputGroupAddon addonType="append">Quantity</InputGroupAddon>
+              </InputGroup>
+              <br />
+              <InputGroup size='lg'>
+                <Input
+                type='number'
+                value={this.state.type_id}
+                min={0} max={1000}
+                onChange={this.handleChange}
+                required
+                />
+                <InputGroupAddon addonType="append">Quantity</InputGroupAddon>
+              </InputGroup>
+              <br />
                 <Button className='mt-3'>Submit</Button>
             </Form>
             </>
