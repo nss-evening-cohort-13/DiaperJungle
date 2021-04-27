@@ -63,6 +63,7 @@ namespace DiaperJungle.Controllers
             product.title = productObj.title;
             product.description = productObj.description;
             product.quantity = productObj.quantity;
+            product.animal_type_id = productObj.animal_type_id;
 
             _repo.Update(product);
             return NoContent();
