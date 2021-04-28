@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import productData from '../helpers/data/productData';
 // import ProductCard from '../components/productCard';
+import Filter from '../components/filter';
 
 class Products extends React.Component {
     state = {
-      products: []
+      products: [],
+      isChecked: []
     };
 
     componentDidMount() {
@@ -26,9 +28,34 @@ class Products extends React.Component {
       });
     }
 
+    filterProducts = (e) => {
+      const checkedType = e.target.value;
+      const { isChecked, products } = this.state;
+
+      if (e.target.checked && isChecked.length === 0) {
+        const newChecked = products.filter((p) => p.type_id === checkedType);
+        this.setState({
+          isChecked: newChecked
+        });
+      } else if (e.target.checked && isChecked.length > 0) {
+        const currentlyChecked = isChecked;
+        const newChecked = products.filter((p) => p.type_id === checkedType);
+        currentlyChecked.forEach((p) => {
+          newChecked.push(p);
+        });
+        this.setState({
+          isChecked: newChecked
+        });
+      } else if (!e.target.checked) {
+        const minusTarget = isChecked.filter((p) => p.type_id !== checkedType);
+        this.setState({
+          isChecked: minusTarget
+        });
+      }
+    }
+
     render() {
       const { products } = this.state;
-      console.warn('products in render', products);
 
       const productCard = (product) => (
         <div className='product-card' style= {{ width: '500px' }}>
@@ -50,6 +77,9 @@ class Products extends React.Component {
       return (
             <>
             <h2>Products</h2>
+            <div className="filter-container">
+              <Filter products={products} filterProducts={this.filterProducts} />
+            </div>
             <div>{cards}</div>
             </>
       );
