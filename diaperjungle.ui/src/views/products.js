@@ -68,22 +68,22 @@ class Products extends React.Component {
           <Link className='btn btn-primary' to={`/products/${product.id}`}>Product Details</Link>{' '}
         </div>
         </div>);
-
       const cards = products.map(productCard);
       // const cards = () => products.map((allProducts) => (
       //   <ProductCard key={allProducts.id} allProducts={allProducts} />
       // ));
-
       return (
             <>
             <h2>Products</h2>
             <div className="filter-container">
               <Filter products={products} filterProducts={this.filterProducts} />
             </div>
+            <Link className='btn btn-info' to={'product-form'}>
+                Add Products
+            </Link>
             <div>{cards}</div>
             </>
       );
     }
 }
-
 export default Products;
