@@ -23,6 +23,7 @@ const deleteProducts = (Id) => axios.delete(`${productUrl}/${Id}`);
 const addProduct = (data) => new Promise((resolve, reject) => {
   axios.post(`${productUrl}`, data)
     .then((response) => {
+      console.warn(response);
       resolve(response.data);
     }).catch((error) => reject(error));
 });
