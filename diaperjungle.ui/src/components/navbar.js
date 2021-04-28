@@ -8,8 +8,6 @@ import {
   NavItem,
   NavbarText,
 } from 'reactstrap';
-// import firebase from 'firebase/app';
-import 'firebase/auth';
 import { Link } from 'react-router-dom';
 import SearchInput from './searchInput';
 
