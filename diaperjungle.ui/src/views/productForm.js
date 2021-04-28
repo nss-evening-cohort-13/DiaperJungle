@@ -15,7 +15,9 @@ class ProductForm extends Component {
 
     handleSubmit = (e) => {
       e.preventDefault();
-      productData.addProduct(this.state);
+      productData.addProduct(this.state).then(() => {
+        this.props.history.goBack();
+      });
     }
 
     render() {
