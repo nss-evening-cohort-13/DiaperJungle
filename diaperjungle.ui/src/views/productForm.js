@@ -24,7 +24,6 @@ class ProductForm extends Component {
       return (
             <>
             <h2>Add A Product</h2>
-            <h5>TypeId is a number 1 to 5</h5>
             <Form className='container mb-3' onSubmit={this.handleSubmit}>
               <InputGroup size='lg'>
                 <Input
@@ -37,6 +36,19 @@ class ProductForm extends Component {
                 required
                 />
                 <InputGroupAddon addonType="append">Type ID</InputGroupAddon>
+              </InputGroup>
+              <br />
+              <InputGroup size='lg'>
+                <Input
+                type='number'
+                name='animal_type_id'
+                value={this.state.animal_type_id}
+                min={1} max={10}
+                placeholder='1 - 10'
+                onChange={this.handleChange}
+                required
+                />
+                <InputGroupAddon addonType="append">Animal Type ID</InputGroupAddon>
               </InputGroup>
               <br />
               <InputGroup size='lg'>
@@ -94,19 +106,6 @@ class ProductForm extends Component {
                 required
                 />
                 <InputGroupAddon addonType="append">Image URL</InputGroupAddon>
-              </InputGroup>
-              <br />
-              <InputGroup size='lg'>
-                <Input
-                type='number'
-                name='animal_type_id'
-                value={this.state.animal_type_id}
-                min={1} max={10}
-                placeholder='1 - 10'
-                onChange={this.handleChange}
-                required
-                />
-                <InputGroupAddon addonType="append">Animal Type ID</InputGroupAddon>
               </InputGroup>
               <br />
                 <Button className='mt-3'>Submit</Button>
