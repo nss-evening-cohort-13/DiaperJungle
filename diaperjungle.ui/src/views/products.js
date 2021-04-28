@@ -47,9 +47,9 @@ class Products extends React.Component {
           isSelected: newChecked
         });
       } else if (!e.target.checked) {
-        const minusTarget = isSelected.filter((product) => product.type_id !== checkedType);
+        const noMatch = isSelected.filter((product) => product.type_id !== checkedType);
         this.setState({
-          isSelected: minusTarget
+          isSelected: noMatch
         });
       }
     }
