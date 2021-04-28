@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import productData from '../helpers/data/productData';
-// import ProductCard from '../components/productCard';
+import ProductCard from '../components/productCard';
 import Filter from '../components/filter';
 
 class Products extends React.Component {
     state = {
       products: [],
-      isChecked: []
+      isSelected: []
     };
 
     componentDidMount() {
@@ -29,59 +29,49 @@ class Products extends React.Component {
     }
 
     filterProducts = (e) => {
-      const checkedType = e.target.value;
-      const { isChecked, products } = this.state;
+      const checkedType = (parseInt(e.target.value, 10));
+      const { isSelected, products } = this.state;
 
-      if (e.target.checked && isChecked.length === 0) {
-        const newChecked = products.filter((p) => p.type_id === checkedType);
+      if (e.target.checked && isSelected.length === 0) {
+        const newChecked = products.filter((product) => product.type_id === checkedType);
         this.setState({
-          isChecked: newChecked
+          isSelected: newChecked
         });
-      } else if (e.target.checked && isChecked.length > 0) {
-        const currentlyChecked = isChecked;
-        const newChecked = products.filter((p) => p.type_id === checkedType);
-        currentlyChecked.forEach((p) => {
-          newChecked.push(p);
+      } else if (e.target.checked && isSelected.length > 0) {
+        const currentlyChecked = isSelected;
+        const newChecked = products.filter((product) => product.type_id === checkedType);
+        currentlyChecked.forEach((product) => {
+          newChecked.push(product);
         });
         this.setState({
-          isChecked: newChecked
+          isSelected: newChecked
         });
       } else if (!e.target.checked) {
-        const minusTarget = isChecked.filter((p) => p.type_id !== checkedType);
+        const minusTarget = isSelected.filter((product) => product.type_id !== checkedType);
         this.setState({
-          isChecked: minusTarget
+          isSelected: minusTarget
         });
       }
     }
 
     render() {
-      const { products } = this.state;
-
-      const productCard = (product) => (
-        <div className='product-card' style= {{ width: '500px' }}>
-        <div className='card m-2'>
-          <img src={product.image_url} alt=''></img>
-          <h5 className='card-title'>{product.title}</h5>
-          <div className='card-body'>
-          <p className='card-text'>{product.description}</p>
-          </div>
-          <Link className='btn btn-primary' to={`/products/${product.id}`}>Product Details</Link>{' '}
-        </div>
-        </div>);
-      const cards = products.map(productCard);
-      // const cards = () => products.map((allProducts) => (
-      //   <ProductCard key={allProducts.id} allProducts={allProducts} />
-      // ));
+      const { isSelected, products } = this.state;
+      const renderAllProductCards = () => products.map((product) => <ProductCard key={product.id} product={product} />);
+      const renderSelectedCards = () => isSelected.map((product) => <ProductCard key={product.id} product={product} />);
       return (
             <>
-            <h2>Products</h2>
-            <div className="filter-container">
-              <Filter products={products} filterProducts={this.filterProducts} />
-            </div>
-            <Link className='btn btn-info' to={'product-form'}>
-                Add Products
-            </Link>
-            <div>{cards}</div>
+              <h2>Products</h2>
+              <div className="filter-container">
+                <Filter products={products} filterProducts={this.filterProducts} />
+              </div>
+              <Link className='btn btn-info' to={'product-form'}>
+                  Add Products
+              </Link>
+              <div>
+                {isSelected.length === 0
+                  ? renderAllProductCards()
+                  : renderSelectedCards()}
+              </div>
             </>
       );
     }

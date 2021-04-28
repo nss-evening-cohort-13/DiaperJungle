@@ -5,7 +5,7 @@ export default class FilterCheckbox extends React.Component {
     const { category, quantity, filterProducts } = this.props;
     return (
             <div className="checkbox-component">
-            <input type="checkbox" className="checkbox" value={category.category} onChange={(e) => filterProducts(e)}></input>
+            <input type="checkbox" className="checkbox" value={category.id} onChange={(e) => filterProducts(e)}></input>
             <label>{category.category} ({quantity})</label>
             </div>
     );

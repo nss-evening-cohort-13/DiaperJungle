@@ -1,7 +1,7 @@
 import React from 'react';
 // import { Card } from 'react-bootstrap';
 import productTypeData from '../helpers/data/productTypeData';
-// import FilterCheckbox from './filterCheckbox';
+import FilterCheckbox from './filterCheckbox';
 
 export default class Filter extends React.Component {
     state = {
@@ -28,15 +28,14 @@ export default class Filter extends React.Component {
 
     render() {
       const { categories } = this.state;
-      // const { filterProducts } = this.props;
+      const { filterProducts } = this.props;
+
+      const renderCheckboxes = () => (
+        categories.map((category) => <FilterCheckbox key={category.id} category={category} quantity={this.numOfTypes(category.id)} filterProducts={filterProducts} />)
+      );
       return (
         <>
-          {categories.forEach((category) => { <h1>{category.category}</h1>; })}
-                            {/* {categories.map((category) => {
-                              if (this.numOfTypes(category.id) !== 0) {
-                                return <FilterCheckbox key={category.id} category={category} quantity={this.numOfTypes(category.id)} filterProducts={filterProducts} />;
-                              }
-                            })} */}
+          {renderCheckboxes()}
         </>
       );
     }
