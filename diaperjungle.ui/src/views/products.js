@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import productData from '../helpers/data/productData';
-// import ProductCard from '../components/productCard';
+import ProductCard from '../components/productCard';
+import Filter from '../components/filter';
 
 class Products extends React.Component {
     state = {
-      products: []
+      products: [],
+      isSelected: []
     };
 
     componentDidMount() {
@@ -26,31 +28,50 @@ class Products extends React.Component {
       });
     }
 
+    filterProducts = (e) => {
+      const checkedType = (parseInt(e.target.value, 10));
+      const { isSelected, products } = this.state;
+
+      if (e.target.checked && isSelected.length === 0) {
+        const newChecked = products.filter((product) => product.type_id === checkedType);
+        this.setState({
+          isSelected: newChecked
+        });
+      } else if (e.target.checked && isSelected.length > 0) {
+        const currentlyChecked = isSelected;
+        const newChecked = products.filter((product) => product.type_id === checkedType);
+        currentlyChecked.forEach((product) => {
+          newChecked.push(product);
+        });
+        this.setState({
+          isSelected: newChecked
+        });
+      } else if (!e.target.checked) {
+        const noMatch = isSelected.filter((product) => product.type_id !== checkedType);
+        this.setState({
+          isSelected: noMatch
+        });
+      }
+    }
+
     render() {
-      const { products } = this.state;
-      console.warn('products in render', products);
-      const productCard = (product) => (
-        <div className='product-card' style= {{ width: '500px' }}>
-        <div className='card m-2'>
-          <img src={product.image_url} alt=''></img>
-          <h5 className='card-title'>{product.title}</h5>
-          <div className='card-body'>
-          <p className='card-text'>{product.description}</p>
-          </div>
-          <Link className='btn btn-primary' to={`/products/${product.id}`}>Product Details</Link>{' '}
-        </div>
-        </div>);
-      const cards = products.map(productCard);
-      // const cards = () => products.map((allProducts) => (
-      //   <ProductCard key={allProducts.id} allProducts={allProducts} />
-      // ));
+      const { isSelected, products } = this.state;
+      const renderAllProductCards = () => products.map((product) => <ProductCard key={product.id} product={product} />);
+      const renderSelectedCards = () => isSelected.map((product) => <ProductCard key={product.id} product={product} />);
       return (
             <>
-            <h2>Products</h2>
-            <Link className='btn btn-info' to={'product-form'}>
-                Add Products
+              <h2>Products</h2>
+              <div className="filter-container">
+                <Filter products={products} filterProducts={this.filterProducts} />
+              </div>
+              <Link className='btn btn-info' to={'product-form'}>
+                  Add Products
               </Link>
-            <div>{cards}</div>
+              <div>
+                {isSelected.length === 0
+                  ? renderAllProductCards()
+                  : renderSelectedCards()}
+              </div>
             </>
       );
     }
