@@ -34,7 +34,7 @@ class ProductDetails extends Component {
                 <h2>{products.title}</h2>
                 <h3>{products.description}</h3>
                 <Button color="danger" onClick={this.removeProducts}>Delete</Button>{' '}
-                <Button color="success" onClick={''}>Delete</Button>{' '}
+                <Button color="success" onClick={''}>Add To Cart</Button>{' '}
             </div>
       );
     }
