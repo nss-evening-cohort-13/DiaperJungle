@@ -10,7 +10,8 @@ export default function ProductCard({ product }) {
           <div className='card-body'>
           <p className='card-text'>{product.description}</p>
           </div>
-          <Link className='btn btn-primary' to={`/products/${product.id}`}>Product Details</Link>{' '}
+          <Link className='btn btn-primary m-2' to={`/products/${product.id}`}>Product Details</Link>{' '}
+          <Link className='btn btn-success m-2' to=''>Add To Cart</Link>{' '}
         </div>
         </div>
   );
