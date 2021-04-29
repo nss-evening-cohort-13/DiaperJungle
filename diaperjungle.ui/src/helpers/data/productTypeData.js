@@ -5,7 +5,7 @@ const productTypeUrl = `${baseUrl}/producttypes`;
 
 const getAllProductTypes = () => new Promise((resolve, reject) => {
   axios.get(`${productTypeUrl}`).then((response) => {
-    console.warn('response', response);
+    console.warn('Product Type Response', response);
     resolve(Object.values(response.data));
   }).catch((error) => reject(error));
 });

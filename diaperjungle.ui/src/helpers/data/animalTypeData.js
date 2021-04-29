@@ -5,7 +5,7 @@ const animalTypeUrl = `${baseUrl}/animaltypes`;
 
 const getAllAnimalTypes = () => new Promise((resolve, reject) => {
   axios.get(`${animalTypeUrl}`).then((response) => {
-    console.warn('response', response);
+    console.warn('Animal Type Response', response);
     resolve(Object.values(response.data));
   }).catch((error) => reject(error));
 });

@@ -3,9 +3,35 @@ import {
   Button, Form, Input, InputGroup, InputGroupAddon
 } from 'reactstrap';
 import productData from '../helpers/data/productData';
+import productTypeData from '../helpers/data/productTypeData';
+import animalTypeData from '../helpers/data/animalTypeData';
 
 class ProductForm extends Component {
-    state = {}
+    state = {
+      productType: [],
+      animalType: [],
+    }
+
+    componentDidMount() {
+      this.getAllOfTheProductTypes();
+      this.getAllOfTheAnimalTypes();
+    }
+
+    getAllOfTheProductTypes = () => {
+      productTypeData.getAllProductTypes().then((response) => {
+        this.setState({
+          productType: response,
+        });
+      });
+    }
+
+    getAllOfTheAnimalTypes = () => {
+      animalTypeData.getAllAnimalTypes().then((response) => {
+        this.setState({
+          animalType: response,
+        });
+      });
+    }
 
     handleChange = (e) => {
       this.setState({
@@ -21,35 +47,34 @@ class ProductForm extends Component {
     }
 
     render() {
+      const { productType, animalType } = this.state;
+      const productOptions = () => productType.map((product) => (
+        <option key={product.id}
+        type='number'
+        name='type_id'
+        value={product.id}
+        onChange={this.handleChange}>{product.category}</option>
+      ));
+      const animalOptions = () => animalType.map((animal) => (
+        <option key={animal.id}
+        type='number'
+        name='animal_type_id'
+        value={animal.id}
+        onChange={this.handleChange}>{animal.animal_category}</option>
+      ));
+      console.warn(this.state.animalType);
       return (
             <>
             <h2>Add A Product</h2>
             <Form className='container mb-3' onSubmit={this.handleSubmit}>
-              <InputGroup size='lg'>
-                <Input
-                type='number'
-                name='type_id'
-                value={this.state.type_id}
-                min={35} max={43}
-                placeholder='35 - 43'
-                onChange={this.handleChange}
-                required
-                />
-                <InputGroupAddon addonType="append">Type ID</InputGroupAddon>
-              </InputGroup>
-              <br />
-              <InputGroup size='lg'>
-                <Input
-                type='number'
-                name='animal_type_id'
-                value={this.state.animal_type_id}
-                min={1} max={10}
-                placeholder='1 - 10'
-                onChange={this.handleChange}
-                required
-                />
-                <InputGroupAddon addonType="append">Animal Type ID</InputGroupAddon>
-              </InputGroup>
+              <select type='number' value={this.state.productType.type_id} name='type_id' onChange={this.handleChange}>
+                <option value='' disabled selected hidden>Product Type</option>
+                {productOptions()}
+              </select>
+              <select type='number' value={this.state.animalType.id} name='animal_type_id' onChange={this.handleChange}>
+                <option value='' disabled selected hidden>Animal Type</option>
+                {animalOptions()}
+              </select>
               <br />
               <InputGroup size='lg'>
                 <Input
