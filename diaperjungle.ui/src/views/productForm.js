@@ -35,7 +35,7 @@ class ProductForm extends Component {
 
     handleChange = (e) => {
       this.setState({
-        [e.target.name]: e.target.type === 'number' ? parseInt(e.target.value, 10) : e.target.value
+        [e.target.name]: e.target.type !== 'text' ? parseInt(e.target.value, 10) : e.target.value
       });
     }
 
@@ -62,7 +62,7 @@ class ProductForm extends Component {
         value={animal.id}
         onChange={this.handleChange}>{animal.animal_category}</option>
       ));
-      console.warn(this.state.animalType);
+
       return (
             <>
             <h2>Add A Product</h2>
@@ -124,7 +124,7 @@ class ProductForm extends Component {
               <br />
               <InputGroup size='lg'>
                 <Input
-                type='url'
+                type='text'
                 name='image_url'
                 value={this.state.image_url}
                 onChange={this.handleChange}

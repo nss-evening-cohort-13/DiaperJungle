@@ -20,7 +20,6 @@ class ProductTypes extends React.Component {
 
     render() {
       const { productTypes } = this.state;
-      console.warn('productTypes', productTypes);
 
       const productCard = (productType) => (
              <div>
@@ -28,7 +27,6 @@ class ProductTypes extends React.Component {
              </div>);
 
       const cards = productTypes.map(productCard);
-      // console.warn('cards', cards);
 
       return (
             <>
