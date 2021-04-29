@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import firebase from 'firebase/app';
 import {
   Collapse,
   Navbar,
@@ -9,25 +10,36 @@ import {
   NavbarText,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import Auth from './Auth';
 import SearchInput from './searchInput';
 
 // pass user as parameter when user auth is setup
-const MyNavbar = () => {
-  // const logMeOut = (e) => {
-  //   e.preventDefault();
-  //   firebase.auth().signOut();
-  // };
+class MyNavbar extends React.Component {
+  state = {
+    isOpen: false,
+  }
 
-  const [isOpen, setIsOpen] = useState(false);
+logoutClickEvent = (e) => {
+  e.preventDefault();
+  console.log('logout');
+  firebase.auth().signOut();
+}
 
-  const toggle = () => setIsOpen(!isOpen);
+// const [isOpen, setIsOpen] = useState(false);
 
-  return (
+// const toggle = () => setIsOpen(!isOpen);
+
+  toggle = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  }
+
+  render() {
+    return (
     <div>
       <Navbar color="dark" expand="lg">
         <NavbarBrand className='gradient-text' href="/">Diaper Jungle</NavbarBrand>
-        <NavbarToggler onClick={toggle} className='custom-toggler'/>
-        <Collapse isOpen={isOpen} navbar>
+        <NavbarToggler onClick={this.toggle} className='custom-toggler'/>
+        <Collapse isOpen={this.isOpen} navbar>
           <Nav className="link-container mr-auto" navbar>
             <NavItem>
               <Link to='/products' className="nav-link m-2" href="#">Diapers</Link>
@@ -43,6 +55,12 @@ const MyNavbar = () => {
             </NavItem>
             <NavItem>
               <Link to='/cart' className="nav-link m-2" href="#">Cart</Link>
+            </NavItem>
+            <NavItem>
+              <Auth />
+            </NavItem>
+            <NavItem>
+              <Link to='null' className="nav-link m-2" href="#" onClick={this.logoutClickEvent}>Logout</Link>
             </NavItem>
           </Nav>
           <p className='mr-2 mt-3 text-light'>Search:</p>
@@ -61,7 +79,8 @@ const MyNavbar = () => {
         </Collapse>
       </Navbar>
     </div>
-  );
-};
+    );
+  }
+}
 
 export default MyNavbar;

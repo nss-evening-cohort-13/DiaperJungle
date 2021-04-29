@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { Link } from 'react-router-dom';
 
 export default class Auth extends Component {
   loginClickEvent = (e) => {
@@ -11,11 +12,10 @@ export default class Auth extends Component {
 
   render() {
     return (
-      <div className="Auth d-flex justify-content-center">
-      <button className="btn" onClick={this.loginClickEvent}>
-        Sign In
-      </button>
-    </div>
+      // <Button outline color="info" className="btn" onClick={this.loginClickEvent}>
+      //  Sign In
+      // </Button>
+      <Link to='null' className="nav-link m-2" href="#" onClick={this.loginClickEvent}>Login</Link>
     );
   }
 }

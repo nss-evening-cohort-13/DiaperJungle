@@ -17,6 +17,8 @@ class App extends React.Component {
   componentDidMount() {
     this.removeListener = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        // grabs the auth token use sessionStorage.getItem("token") to grab it
+        user.getIdToken().then((token) => sessionStorage.setItem('token', token));
         this.setState({ user });
       } else {
         this.setState({ user: false });
@@ -33,7 +35,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <BrowserRouter>
-          <Navbar />
+          <Navbar user={this.state.user}/>
           <Routes />
         </BrowserRouter>
       </div>

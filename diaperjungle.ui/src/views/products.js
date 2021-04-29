@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Auth from '../components/Auth';
 import productData from '../helpers/data/productData';
 // import ProductCard from '../components/productCard';
 
@@ -50,7 +49,6 @@ class Products extends React.Component {
 
       return (
             <>
-            <Auth />
             <h2>Products</h2>
             <div>{cards}</div>
             </>
