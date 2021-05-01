@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
+import Modal from '../components/modal';
+import ProductForm from './productUpdateForm';
 import productData from '../helpers/data/productData';
 
 class ProductDetails extends Component {
@@ -34,6 +36,13 @@ class ProductDetails extends Component {
                 <h2>{products.title}</h2>
                 <h3>{products.description}</h3>
                 <Button color="danger" onClick={this.removeProducts}>Delete</Button>{' '}
+                {(
+                  <Modal title={'Update Product'} buttonLabel={'Update Product'}>
+                    {Object.keys(products).length && (
+                      <ProductForm products={products} onUpdate={this.getASingleProduct} />
+                    )}
+                  </Modal>
+                )}
                 <Button color="success" onClick={''}>Add To Cart</Button>{' '}
             </div>
       );

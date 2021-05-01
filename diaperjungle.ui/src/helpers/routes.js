@@ -5,7 +5,7 @@ import Products from '../views/products';
 import Users from '../views/users';
 import ProductTypes from '../views/productTypes';
 import ProductDetails from '../views/productDetails';
-import ProductForm from '../views/productForm';
+import ProductForm from '../views/productAddForm';
 import SearchResults from '../views/searchResults';
 import ordersSingleDetail from '../views/ordersSingleDetails';
 
