@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DiaperJungle.DataAccess;
 using DiaperJungle.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DiaperJungle.Controllers
 {
@@ -20,8 +21,9 @@ namespace DiaperJungle.Controllers
             _repo = new ProductRepository();
         }
 
-        
+
         //GET to /api/Products
+        [Authorize]
         [HttpGet]
         public IActionResult GetAllProducts()
         {
