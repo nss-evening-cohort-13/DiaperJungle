@@ -25,10 +25,6 @@ logoutClickEvent = (e) => {
   firebase.auth().signOut();
 }
 
-// const [isOpen, setIsOpen] = useState(false);
-
-// const toggle = () => setIsOpen(!isOpen);
-
   toggle = () => {
     this.setState({ isOpen: !this.state.isOpen });
   }
