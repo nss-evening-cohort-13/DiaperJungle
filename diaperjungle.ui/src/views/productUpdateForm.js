@@ -10,7 +10,7 @@ class ProductUpdateForm extends Component {
     state = {
       productType: [],
       animalType: [],
-      animal_type_id: this.props.products?.animal_type_id || '',
+      animal_type_id: this.props.products?.animal_type_idnpm,
       description: this.props.products?.description || '',
       id: this.props.products?.id || '',
       image_url: this.props.products?.image_url || '',
@@ -50,7 +50,9 @@ class ProductUpdateForm extends Component {
     handleSubmit = (e) => {
       e.preventDefault();
 
-      productData.updateProducts(this.state);
+      productData.updateProducts(this.state).then(() => {
+        this.props.onUpdate?.(this.state.id);
+      });
       this.props.toggle();
     }
 

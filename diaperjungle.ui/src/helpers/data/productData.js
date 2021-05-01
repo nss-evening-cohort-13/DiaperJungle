@@ -44,7 +44,7 @@ const updateProducts = (data) => new Promise((resolve, reject) => {
     quantity: objData.quantity,
     image_url: objData.image_url,
   };
-  axios.patch(`${productUrl}/${data.id}/update`, newObj)
+  axios.put(`${productUrl}/${data.id}/update`, newObj)
     .then(resolve)
     .catch((error) => reject(error));
 });
