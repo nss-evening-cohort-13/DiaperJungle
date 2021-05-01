@@ -53,7 +53,7 @@ namespace DiaperJungle.Controllers
 
         
         //PUT to /api/{productsId}/update
-        [HttpPut("{id}/update")]
+        [HttpPatch("{id}/update")]
         public IActionResult UpdateUser(int id, Product productObj)
         {
             var product = _repo.Get(id);

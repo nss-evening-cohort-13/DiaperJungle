@@ -41,6 +41,7 @@ class ProductForm extends Component {
 
     handleSubmit = (e) => {
       e.preventDefault();
+
       productData.addProduct(this.state).then(() => {
         this.props.history.goBack();
       });
@@ -65,13 +66,13 @@ class ProductForm extends Component {
 
       return (
             <>
-            <h2>Add A Product</h2>
+            <h2>Product Form</h2>
             <Form className='container mb-3' onSubmit={this.handleSubmit}>
-              <select type='number' value={this.state.productType.type_id} name='type_id' onChange={this.handleChange}>
+              <select type='number' value={this.state.productType.type_id} name='type_id' onChange={this.handleChange} required>
                 <option value='' disabled selected hidden>Product Type</option>
                 {productOptions()}
               </select>
-              <select type='number' value={this.state.animalType.id} name='animal_type_id' onChange={this.handleChange}>
+              <select type='number' value={this.state.animalType.id} name='animal_type_id' onChange={this.handleChange} required>
                 <option value='' disabled selected hidden>Animal Type</option>
                 {animalOptions()}
               </select>
