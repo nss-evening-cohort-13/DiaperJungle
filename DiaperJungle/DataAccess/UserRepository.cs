@@ -41,9 +41,9 @@ namespace DiaperJungle.DataAccess
         //Adds a user
         public void Add(User user)
         {
-            var sql = @"INSERT INTO [dbo].[User] ([first_name], [last_name], [date_created], [username], [password], [is_admin])
+            var sql = @"INSERT INTO [dbo].[User] ([first_name], [last_name], [date_created], [username], [password], [is_admin], [fb_uid])
                         OUTPUT inserted.id
-                        VALUES(@first_name, @last_name, CURRENT_TIMESTAMP, @username, @password, @is_admin)";
+                        VALUES(@first_name, @last_name, CURRENT_TIMESTAMP, @username, @password, @is_admin, @fb_uid)";
 
             using var db = new SqlConnection(ConnectionString);
 
