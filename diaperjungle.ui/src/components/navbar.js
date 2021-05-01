@@ -21,7 +21,6 @@ class MyNavbar extends React.Component {
 
 logoutClickEvent = (e) => {
   e.preventDefault();
-  console.log('logout');
   firebase.auth().signOut();
 }
 
