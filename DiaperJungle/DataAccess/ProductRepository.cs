@@ -48,9 +48,9 @@ namespace DiaperJungle.DataAccess
         //Add a product into the database
         public void Add(Product product)
         {
-            var sql = @"INSERT INTO [Product] ([type_id], [price], [title], [description], [quantity])
+            var sql = @"INSERT INTO [Product] ([type_id], [price], [title], [description], [quantity], [image_url], [animal_type_id])
                                                 OUTPUT inserted.id
-                                                VALUES(@type_id, @price, @title, @description, @quantity)";
+                                                VALUES(@type_id, @price, @title, @description, @quantity, @image_url, @animal_type_id)";
 
             using var db = new SqlConnection(connectionString);
 
@@ -83,7 +83,9 @@ namespace DiaperJungle.DataAccess
                             price = @price,
 	                        title = @title,
 	                        description = @description,
-	                        quantity = @quantity
+	                        quantity = @quantity,
+                            image_url = @image_url,
+                            animal_type_id = @animal_type_id
                         WHERE id = @id";
 
             db.Execute(sql, product);
