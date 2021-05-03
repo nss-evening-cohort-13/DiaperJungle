@@ -9,6 +9,12 @@ const getAllProducts = () => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
+const getRecentTwentyProducts = () => new Promise((resolve, reject) => {
+  axios.get(`${productUrl}/recent`).then((response) => {
+    resolve(Object.values(response.data));
+  }).catch((error) => reject(error));
+});
+
 const getSingleProduct = (Id) => new Promise((resolve, reject) => {
   axios.get(`${productUrl}/${Id}`)
     .then((response) => {
@@ -51,6 +57,7 @@ const updateProducts = (data) => new Promise((resolve, reject) => {
 
 export default {
   getAllProducts,
+  getRecentTwentyProducts,
   getSingleProduct,
   deleteProducts,
   addProduct,
