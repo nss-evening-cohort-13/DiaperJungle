@@ -30,6 +30,12 @@ namespace DiaperJungle.Controllers
             return Ok(_repo.GetAll());
         }
 
+        //GET to /api/Products/recent
+        [HttpGet("recent")]
+        public IActionResult GetRecentTwentyProducts()
+        {
+            return Ok(_repo.GetRecentTwenty());
+        }
 
         //GET to /api/Products/{id}
         [HttpGet("{id}")]
