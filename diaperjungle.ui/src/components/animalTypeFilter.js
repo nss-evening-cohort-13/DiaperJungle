@@ -5,6 +5,7 @@ import AnimalTypeData from '../helpers/data/animalTypeData';
 export default class AnimalTypeFilter extends React.Component {
   state = {
     animalcategories: [],
+    animalType: '',
   }
 
   componentDidMount() {
@@ -20,6 +21,11 @@ export default class AnimalTypeFilter extends React.Component {
       .catch((err) => console.error('unable to get data for animal type: ', err));
   }
 
+  animalChange = (e) => {
+    e.preventDefault();
+    this.setState({ animalType: e.target.id });
+  }
+
   render() {
     return (
       <div>
@@ -29,7 +35,7 @@ export default class AnimalTypeFilter extends React.Component {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-          {this.state.animalcategories.map((animal) => <Dropdown.Item key={animal.id} category={animal.animal_category}>{ animal.animal_category }</Dropdown.Item>)}
+          {this.state.animalcategories.map((animal) => <Dropdown.Item key={animal.id} id={animal.id}>{ animal.animal_category }</Dropdown.Item>)}
           </Dropdown.Menu>
         </Dropdown>
       </div>
