@@ -11,12 +11,6 @@ class Home extends React.Component {
       this.getAllOfTheProducts();
     }
 
-    handleChange = (e) => {
-      this.setState({
-        [e.target.name]: e.target.value,
-      });
-    }
-
     getAllOfTheProducts = () => {
       productData.getRecentTwentyProducts().then((response) => {
         this.setState({
