@@ -5,7 +5,8 @@ import AnimalTypeData from '../helpers/data/animalTypeData';
 export default class AnimalTypeFilter extends React.Component {
   state = {
     animalcategories: [],
-    animalType: '',
+    animalId: -1,
+    animalName: 'Animal',
   }
 
   componentDidMount() {
@@ -21,9 +22,10 @@ export default class AnimalTypeFilter extends React.Component {
       .catch((err) => console.error('unable to get data for animal type: ', err));
   }
 
-  animalChange = (e) => {
-    e.preventDefault();
-    this.setState({ animalType: e.target.id });
+  getAnimalId = (e) => {
+    this.props.animalTypeData(e);
+    const foundAnimal = this.state.animalcategories.find((animal) => parseInt(animal.id, 10) === parseInt(e, 10));
+    this.setState({ animalId: e, animalName: foundAnimal.animal_category });
   }
 
   render() {
@@ -31,11 +33,13 @@ export default class AnimalTypeFilter extends React.Component {
       <div>
         <Dropdown>
           <Dropdown.Toggle variant='success' id='dropdown-basic'>
-            Animals
+          {this.state.animalName}
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-          {this.state.animalcategories.map((animal) => <Dropdown.Item key={animal.id} id={animal.id}>{ animal.animal_category }</Dropdown.Item>)}
+            {this.state.animalcategories.map((animal) => <Dropdown.Item key={animal.id} eventKey={animal.id} id={animal.id} onSelect={this.getAnimalId}>
+              { animal.animal_category }
+            </Dropdown.Item>)}
           </Dropdown.Menu>
         </Dropdown>
       </div>

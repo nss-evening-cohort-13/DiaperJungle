@@ -9,6 +9,7 @@ class Products extends React.Component {
   state = {
     products: [],
     isSelected: [],
+    animalId: -1,
   };
 
   componentDidMount() {
@@ -28,6 +29,11 @@ class Products extends React.Component {
       });
     });
   };
+
+  // Pass to child to get data
+  animalTypeData = (childData) => {
+    this.setState({ animalId: childData }, () => { console.log('animal id', this.state.animalId); });
+  }
 
   filterProductsByAnimalType = () => {};
 
@@ -74,7 +80,7 @@ class Products extends React.Component {
           <Filter products={products} filterProducts={this.filterProducts} />
         </div>
         <div>
-        <AnimalTypeFilter />
+        <AnimalTypeFilter animalTypeData={this.animalTypeData}/>
         </div>
         <Link className='btn btn-info' to={'product-form'}>
           Add Products
