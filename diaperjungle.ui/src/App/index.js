@@ -36,7 +36,7 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <Navbar user={this.state.user}/>
-          <Routes />
+          <Routes user={this.state.user}/>
         </BrowserRouter>
       </div>
     );

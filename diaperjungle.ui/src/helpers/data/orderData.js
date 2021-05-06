@@ -19,7 +19,23 @@ const getSingleOrder = (Id) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+// Gets orders that are not completed to load the cart
+const getNotCompletedOrders = (fbUid) => new Promise((resolve, reject) => {
+  axios.get(`${OrdersUrl}/${fbUid}/cart`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
+const addOrder = (data) => new Promise((resolve, reject) => {
+  axios.post(`${OrdersUrl}`, data)
+    .then((response) => {
+      resolve(response.data);
+    }).catch((error) => reject(error));
+});
+
 // Deletes a single order base on id and remove it
 const deleteOrders = (Id) => axios.delete(`${OrdersUrl}/${Id}`);
 
-export default { getAllOrders, deleteOrders, getSingleOrder };
+export default {
+  getAllOrders, deleteOrders, getSingleOrder, addOrder, getNotCompletedOrders
+};

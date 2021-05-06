@@ -44,6 +44,24 @@ namespace DiaperJungle.DataAccess
             order.id = orderId;
         }
 
+        //Get orders by user id
+
+        public List<Order> GetOrdersByUserId(string fb_uid)
+        {
+            var sql = @"Select *
+                        From [User] u
+	                        Join Orders o
+	                        ON o.user_id = u.id
+	                        Where u.fb_uid = @fb_uid ";
+
+            //create a connection
+            using var db = new SqlConnection(ConnectionString);
+
+            var order = db.Query<Order>(sql, new { fb_uid = fb_uid }).ToList();
+
+            return order;
+        }
+
         //Get a single order
         public Order Get(int id)
         {

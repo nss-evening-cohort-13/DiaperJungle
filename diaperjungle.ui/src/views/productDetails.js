@@ -3,15 +3,18 @@ import { Button } from 'reactstrap';
 import Modal from '../components/modal';
 import ProductForm from './productUpdateForm';
 import productData from '../helpers/data/productData';
+import orderData from '../helpers/data/orderData';
 
 class ProductDetails extends Component {
     state = {
       products: {},
+      order: {}
     }
 
     componentDidMount() {
       const productId = this.props.match.params.id;
       this.getASingleProduct(productId);
+      this.checkIfUserHasAnIncompleteOrder(this.props.user.uid);
     }
 
     getASingleProduct = (productId) => {
@@ -25,6 +28,14 @@ class ProductDetails extends Component {
     removeProducts = () => {
       productData.deleteProducts(this.state.products.id).then(() => {
         this.props.history.goBack();
+      });
+    }
+
+    checkIfUserHasAnIncompleteOrder = (fbUid) => {
+      orderData.getNotCompletedOrders(fbUid).then((response) => {
+        this.setState({
+          order: response,
+        });
       });
     }
 
@@ -43,7 +54,7 @@ class ProductDetails extends Component {
                     )}
                   </Modal>
                 )}
-                <Button color="success" onClick={''}>Add To Cart</Button>{' '}
+                <Button color="success" >Add To Cart</Button>{' '}
             </div>
       );
     }

@@ -58,5 +58,21 @@ namespace DiaperJungle.Controllers
 
             return Ok();
         }
+
+        [HttpGet("{fb_uid}/cart")]
+        public IActionResult GetOrdersByFBUID(string fb_uid)
+        {
+            var orders = _repo.GetOrdersByUserId(fb_uid);
+
+            foreach(var order in orders)
+            {
+                if (order.is_complete != true)
+                {
+                    return Ok(order);
+                }
+            }
+
+            return NotFound();
+        }
     }
 }
