@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import productData from '../helpers/data/productData';
 import ProductCard from '../components/productCard';
 import Filter from '../components/filter';
@@ -31,6 +32,18 @@ class Products extends React.Component {
       });
     });
   };
+
+  // can't think of a better way to do this at the moment checkboxes are evil
+  clearFilter = () => {
+    // this.setState({
+    //   isSelectedCheckbox: [],
+    //   isSelectedDropdown: [],
+    //   isSelectedFiltered: [],
+    //   animalId: -1,
+    // });
+    // This will refresh to page and reset state
+    window.location.reload(true);
+  }
 
   // Pass to child to get data also filter the data as it comes back
   animalData = (childData) => {
@@ -65,6 +78,7 @@ class Products extends React.Component {
   }
 
   filterProducts = (e) => {
+    console.warn(e);
     // getting the typed id from filter? storing it in checkedtype
     const checkedType = parseInt(e.target.value, 10);
     const { isSelectedCheckbox, products } = this.state;
@@ -102,23 +116,38 @@ class Products extends React.Component {
     }
   };
 
-  //only show stuff that is matching need to set conditions for when things don't match or for when only the checkboxes or the dropdown is used
   filterCheckboxAndDropdown = () => {
-    const thingArray = [];
-    // loop over isSelectedCheck
-    this.state.isSelectedCheckbox.forEach((animalCheck) => {
-      // loop over isSelectedDrop
-      this.state.isSelectedDropdown.forEach((animalDrop) => {
-        // find the products that match both conditions
-        if (animalCheck.animal_type_id === animalDrop.id) {
-          thingArray.push(animalDrop);
-        }
+    const animalFilterArray = [];
+    // Checks if the dropdown and checkbox have anything in them if no dropdown item is selected display the checkboxed items
+    if (this.state.isSelectedDropdown.length === 0 && this.state.isSelectedCheckbox.length > 0) {
+      this.setState({
+        isSelectedFiltered: this.state.isSelectedCheckbox,
       });
-    });
-    // set the state of isSelectedFilter with the results
-    this.setState({
-      isSelectedFiltered: thingArray,
-    });
+    // Checks if the dropdown and checkbox have anything in them if no checkbox item is selected display the dropdown items
+    } else if (this.state.isSelectedDropdown.length > 0 && this.state.isSelectedCheckbox.length === 0) {
+      this.setState({
+        isSelectedFiltered: this.state.isSelectedDropdown,
+      });
+      // Checks if the dropdown and checkbox have anything in them if they both have something in filter the results and display them
+    } else if (this.state.isSelectedDropdown.length > 0 && this.state.isSelectedCheckbox.length > 0) {
+      this.setState({
+        isSelectedFiltered: [],
+      });
+      // loop over isSelectedCheck
+      this.state.isSelectedCheckbox.forEach((animalCheck) => {
+      // loop over isSelectedDrop
+        this.state.isSelectedDropdown.forEach((animalDrop) => {
+        // find the products that match both conditions
+          if (animalCheck.animal_type_id === animalDrop.id) {
+            animalFilterArray.push(animalDrop);
+          }
+        });
+      });
+      // set the state of isSelectedFilter with the results
+      this.setState({
+        isSelectedFiltered: animalFilterArray,
+      });
+    }
   }
 
   render() {
@@ -137,6 +166,7 @@ class Products extends React.Component {
         <Link className='btn btn-info' to={'product-form'}>
           Add Products
         </Link>
+        <Button variant="warning" onClick={this.clearFilter}>Clear Filter</Button>{' '}
         <div>
           {isSelectedFiltered.length === 0
             ? renderAllProductCards()
