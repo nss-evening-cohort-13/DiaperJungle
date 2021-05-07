@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import orderData from '../helpers/data/orderData';
+import orderProductData from '../helpers/data/orderProductData';
+// import productCard from '../components/productCard';
 
 class OrderSingleDetails extends Component {
     state = {
-      orders: {},
+      order: {},
+      productIds: [],
     }
 
     componentDidMount() {
@@ -12,18 +15,27 @@ class OrderSingleDetails extends Component {
       const orderId = this.props.match.params.id;
       // Then passing the id to this function
       this.getASingleOrder(orderId);
+      this.getOrderProductIds(orderId);
     }
 
     // Gets a single order by Id and sets the state to that single order
     getASingleOrder = (orderId) => {
       orderData.getSingleOrder(orderId).then((response) => {
         this.setState({
-          orders: response,
+          order: response,
         });
       });
     }
 
-    removeOrders = () => {
+    getOrderProductIds = (orderId) => {
+      orderProductData.getProductsOfAnOrder(orderId).then((response) => {
+        this.setState({
+          productIds: response,
+        });
+      });
+    }
+
+    removeOrder = () => {
       // Grabs the id from the current state state/orders/id and removes it
       orderData.deleteOrders(this.state.orders.id).then(() => {
         // Goes back to the last page you were on
@@ -33,13 +45,13 @@ class OrderSingleDetails extends Component {
 
     render() {
       // instead of typing this.state.id I can type orders.id
-      const { orders } = this.state;
+      const { order } = this.state;
       return (
             <div>
                 <h1>This is the single order view</h1>
-                <h2>Order Id: {orders.id}</h2>
-                <h3>User Id:{orders.user_id}</h3>
-                <Button color="danger" onClick={this.removeOrders}>Remove Order</Button>{' '}
+                <h2>Order Id: {order.id}</h2>
+                <h3>User Id:{order.user_id}</h3>
+                <Button color="danger" onClick={this.removeOrder}>Remove Order</Button>{' '}
             </div>
       );
     }

@@ -36,7 +36,7 @@ class Orders extends React.Component {
           <CardText>Pay_Type: {order.pay_type}</CardText>
           <CardText>User_Id: {order.user_id}</CardText>
           <CardText>Total_Cost: ${order.total_cost}</CardText>
-          <Link className="btn btn-primary" to={`/orders/${order.id}`}>Order Single view</Link>{' '}
+          <Link className="btn btn-primary" to={`/order-details/${order.id}`}>Order Single view</Link>{' '}
         </CardBody>
       </Card>
     </div>
