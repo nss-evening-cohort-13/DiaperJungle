@@ -43,7 +43,7 @@ namespace DiaperJungle.Controllers
 
         //POST to /api/AnimalTypes
         [HttpPost]
-        public IActionResult AddAProductType(AnimalType animalType)
+        public IActionResult AddAProductType(AnimalsType animalType)
         {
             _repo.Add(animalType);
             return Created($"api/AnimalTypes/{animalType.id}", animalType);
@@ -60,7 +60,7 @@ namespace DiaperJungle.Controllers
 
         //PUT to /api/{AnimalTypesId}/update
         [HttpPut("{id}/update")]
-        public IActionResult UpdateProductType(int id, AnimalType newCategory)
+        public IActionResult UpdateProductType(int id, AnimalsType newCategory)
         {
             var animalType = _repo.Get(id);
 
