@@ -29,6 +29,24 @@ namespace DiaperJungle.DataAccess
             return results;
         }
 
+        // Get first 20 new products
+        public List<Product> GetRecentTwenty()
+        {
+            //create connection
+            using var db = new SqlConnection(connectionString);
+
+            //sql select all from products
+            var sql = @"SELECT TOP 20 *
+                        FROM Product
+                        ORDER BY id DESC";
+
+            //grab sql data and turn it into list
+            var results = db.Query<Product>(sql).ToList();
+
+            //return list
+            return results;
+        }
+
         //Get a single product
         public Product Get(int id)
         {

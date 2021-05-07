@@ -15,5 +15,6 @@ namespace DiaperJungle.Models
         public string password { get; set; }
         public bool is_admin { get; set; }
         public int payment_id { get; set; }
+        public string fb_uid { get; set; }
     }
 }
