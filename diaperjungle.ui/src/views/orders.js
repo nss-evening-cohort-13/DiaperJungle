@@ -13,11 +13,12 @@ class Orders extends React.Component {
   };
 
   componentDidMount() {
-    this.getAllTheOrders();
+    const fbUid = this.props.match.params.id;
+    this.getAllOrderByUser(fbUid);
   }
 
-  getAllTheOrders = () => {
-    orderData.getAllOrders().then((response) => {
+  getAllOrderByUser = (fbUid) => {
+    orderData.getAllCompletedUserOrders(fbUid).then((response) => {
       this.setState({
         orders: response,
       });

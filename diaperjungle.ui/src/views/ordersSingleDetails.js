@@ -37,8 +37,8 @@ class OrderSingleDetails extends Component {
       return (
             <div>
                 <h1>This is the single order view</h1>
-                <h2>{orders.id}</h2>
-                <h3>{orders.user_id}</h3>
+                <h2>Order Id: {orders.id}</h2>
+                <h3>User Id:{orders.user_id}</h3>
                 <Button color="danger" onClick={this.removeOrders}>Remove Order</Button>{' '}
             </div>
       );

@@ -10,11 +10,12 @@ import ProductForm from '../views/productAddForm';
 import SearchResults from '../views/searchResults';
 import ordersSingleDetail from '../views/ordersSingleDetails';
 
-export default function Routes() {
+export default function Routes({ user }) {
   return (
         <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/orders" component={Orders} />
+            <Route exact path="/orders/:id" component={(props) => <Orders user={user} {...props} />}/>
             <Route exact path="/users" component={Users} />
             <Route exact path='/products' component={Products} />
             <Route exact path='/producttypes' component={ProductTypes}/>
