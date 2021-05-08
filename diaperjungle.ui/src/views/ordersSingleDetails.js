@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import orderData from '../helpers/data/orderData';
 import orderProductData from '../helpers/data/orderProductData';
-// import productCard from '../components/productCard';
+import productData from '../helpers/data/productData';
+import ProductCard from '../components/productCard';
 
 class OrderSingleDetails extends Component {
     state = {
       order: {},
-      productIds: [],
+      products: [],
     }
 
     componentDidMount() {
@@ -29,8 +30,14 @@ class OrderSingleDetails extends Component {
 
     getOrderProductIds = (orderId) => {
       orderProductData.getProductsOfAnOrder(orderId).then((response) => {
+        const newProducts = [];
+        response.forEach((item) => {
+          productData.getSingleProduct(item.product_id).then((response2) => {
+            newProducts.push(response2);
+          });
+        });
         this.setState({
-          productIds: response,
+          products: newProducts,
         });
       });
     }
@@ -45,13 +52,15 @@ class OrderSingleDetails extends Component {
 
     render() {
       // instead of typing this.state.id I can type orders.id
-      const { order } = this.state;
+      const { order, products } = this.state;
+      const renderAllProductCards = () => products.map((product) => <ProductCard key={product.id} product={product} />);
       return (
             <div>
                 <h1>This is the single order view</h1>
                 <h2>Order Id: {order.id}</h2>
                 <h3>User Id:{order.user_id}</h3>
                 <Button color="danger" onClick={this.removeOrder}>Remove Order</Button>{' '}
+                {renderAllProductCards()}
             </div>
       );
     }
