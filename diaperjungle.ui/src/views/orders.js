@@ -13,11 +13,12 @@ class Orders extends React.Component {
   };
 
   componentDidMount() {
-    this.getAllTheOrders();
+    const fbUid = this.props.match.params.id;
+    this.getAllOrderByUser(fbUid);
   }
 
-  getAllTheOrders = () => {
-    orderData.getAllOrders().then((response) => {
+  getAllOrderByUser = (fbUid) => {
+    orderData.getAllCompletedUserOrders(fbUid).then((response) => {
       this.setState({
         orders: response,
       });
@@ -35,7 +36,7 @@ class Orders extends React.Component {
           <CardText>Pay_Type: {order.pay_type}</CardText>
           <CardText>User_Id: {order.user_id}</CardText>
           <CardText>Total_Cost: ${order.total_cost}</CardText>
-          <Link className="btn btn-primary" to={`/orders/${order.id}`}>Order Single view</Link>{' '}
+          <Link className="btn btn-primary" to={`/order-details/${order.id}`}>Order Single view</Link>{' '}
         </CardBody>
       </Card>
     </div>

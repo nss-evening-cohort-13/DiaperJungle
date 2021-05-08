@@ -58,5 +58,12 @@ namespace DiaperJungle.Controllers
 
             return Ok();
         }
+
+        //Get completed user orders
+        [HttpGet("history/{fb_uid}")]
+        public IActionResult GetAllUserCompletedOrders(string fb_uid)
+        {
+            return Ok(_repo.GetAllUserOrderHistory(fb_uid));
+        }
     }
 }

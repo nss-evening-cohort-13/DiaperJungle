@@ -10,10 +10,8 @@ export default class Auth extends Component {
     e.preventDefault();
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then((cred) => {
-      console.warn('cred1', cred.additionalUserInfo.isNewUser);
       const user = cred.additionalUserInfo.profile;
       if (cred.additionalUserInfo.isNewUser) {
-        console.warn('cred2', cred);
         const userInfo = {
           email: user.email,
           first_name: user.given_name,

@@ -37,6 +37,18 @@ namespace DiaperJungle.DataAccess
             return prodType;
         }
 
+        //Get products from an order
+        public List<Order_Product> GetAllProductsOfAnOrder(int orderId)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"Select *
+                        From Order_Product op
+                        Where op.order_id = @orderId";
+
+            return db.Query<Order_Product>(sql, new { orderId = orderId }).ToList();
+        }
+
         //Delete Order_Product
         public void Remove(int id)
         {
