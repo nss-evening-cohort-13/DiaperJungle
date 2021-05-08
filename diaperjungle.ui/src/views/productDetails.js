@@ -4,17 +4,21 @@ import Modal from '../components/modal';
 import ProductForm from './productUpdateForm';
 import productData from '../helpers/data/productData';
 import orderData from '../helpers/data/orderData';
+import cartData from '../helpers/data/cartData';
+import userData from '../helpers/data/userData';
 
 class ProductDetails extends Component {
     state = {
       products: {},
-      order: {}
+      order: {},
+      user: {}
     }
 
     componentDidMount() {
       const productId = this.props.match.params.id;
       this.getASingleProduct(productId);
       this.checkIfUserHasAnIncompleteOrder(this.props.user.uid);
+      this.setUserInState(this.props.user.uid);
     }
 
     getASingleProduct = (productId) => {
@@ -31,12 +35,31 @@ class ProductDetails extends Component {
       });
     }
 
-    checkIfUserHasAnIncompleteOrder = (fbUid) => {
-      orderData.getNotCompletedOrders(fbUid).then((response) => {
+    // checkIfUserHasAnIncompleteOrder = (fbUid) => {
+    //   orderData.getNotCompletedOrders(fbUid).then((response) => {
+    //     this.setState({
+    //       order: response,
+    //     });
+    //   });
+    // }
+
+    setUserInState = (fbUid) => {
+      userData.getUserByFBUid(fbUid).then((response) => {
         this.setState({
-          order: response,
+          user: response,
         });
       });
+    }
+
+    addToCart = (e) => {
+      e.preventDefault();
+      if (this.state.order === '') {
+        orderData.addOrder(this.state).then(() => {
+          console.warn('Order created');
+        });
+      } else {
+        cartData.addToOrderProduct(this.state);
+      }
     }
 
     render() {
@@ -54,7 +77,7 @@ class ProductDetails extends Component {
                     )}
                   </Modal>
                 )}
-                <Button color="success" >Add To Cart</Button>{' '}
+                <Button color="success" onClick={this.addToCart}>Add To Cart</Button>{' '}
             </div>
       );
     }

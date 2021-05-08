@@ -39,6 +39,17 @@ namespace DiaperJungle.Controllers
             return Ok(user);
         }
 
+        [HttpGet("fb/{fb_uid}")]
+        public IActionResult GetUserByFBUid(string fb_uid)
+        {
+            var user = _repo.GetByFBUid(fb_uid);
+            if (user == null)
+            {
+                return NotFound("This user id does not exist");
+            }
+            return Ok(user);
+        }
+
         //POST to /api/Users
         [HttpPost]
         public IActionResult AddAUser(User user)

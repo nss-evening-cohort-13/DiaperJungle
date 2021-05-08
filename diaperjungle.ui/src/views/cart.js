@@ -8,8 +8,6 @@ class Cart extends React.Component {
 
     componentDidMount() { }
 
-    loadTheCartOrCreateTheCart = () => { }
-
     render() {
       return (
             <>

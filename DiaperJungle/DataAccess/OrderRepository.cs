@@ -34,14 +34,16 @@ namespace DiaperJungle.DataAccess
             using var db = new SqlConnection(ConnectionString);
             var orderId = db.ExecuteScalar<int>(sql, order);
 
-            foreach (var item in order.Product)
-            {
-                var productInsert = @"INSERT INTO [dbo].[Order_Product] ([order_id], [product_id])
-                                      VALUES (@orderId, @id)";
-
-                db.Execute(productInsert, new { orderId, item.id });
-            }
             order.id = orderId;
+
+            //foreach (var item in order.Product)
+            //{
+            //    var productInsert = @"INSERT INTO [dbo].[Order_Product] ([order_id], [product_id], [price], [quantity])
+            //                          VALUES (@orderId, @product_id, @price, @quantity)";
+
+            //    db.Execute(productInsert, new { orderId, item });
+            //}
+            
         }
 
         //Get orders by user id

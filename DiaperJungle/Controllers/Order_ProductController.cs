@@ -50,6 +50,13 @@ namespace DiaperJungle.Controllers
             return Ok();
         }
 
+        //POST
+        [HttpPost]
+        public IActionResult AddAnOrder(Order_Product order_product)
+        {
+            _repo.Add(order_product);
+            return Created($"api/orders/{order_product.id}", order_product);
+        }
     }
 }
 

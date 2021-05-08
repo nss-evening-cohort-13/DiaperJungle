@@ -14,9 +14,9 @@ namespace DiaperJungle.Models
         public bool is_complete { get; set; }
 
         //One to many
-        public List<Product> Product { get; set; }
+        public List<Product> Product { get; set; } = new List<Product>();
 
         //One to many
-        public List<User> User { get; set; }
+        public List<User> User { get; set; } = new List<User>();
     }
 }

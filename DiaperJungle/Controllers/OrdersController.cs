@@ -63,7 +63,7 @@ namespace DiaperJungle.Controllers
         public IActionResult GetOrdersByFBUID(string fb_uid)
         {
             var orders = _repo.GetOrdersByUserId(fb_uid);
-
+            
             foreach(var order in orders)
             {
                 if (order.is_complete != true)
@@ -72,7 +72,7 @@ namespace DiaperJungle.Controllers
                 }
             }
 
-            return NotFound();
+            return NoContent();
         }
     }
 }

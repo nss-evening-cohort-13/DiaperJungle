@@ -27,7 +27,12 @@ const getNotCompletedOrders = (fbUid) => new Promise((resolve, reject) => {
 });
 
 const addOrder = (data) => new Promise((resolve, reject) => {
-  axios.post(`${OrdersUrl}`, data)
+  const objData = data;
+  const newObj = {
+    user_id: objData.userTable.id,
+    is_complete: false,
+  };
+  axios.post(`${OrdersUrl}`, newObj)
     .then((response) => {
       resolve(response.data);
     }).catch((error) => reject(error));

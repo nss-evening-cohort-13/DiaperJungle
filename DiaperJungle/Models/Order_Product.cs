@@ -10,5 +10,7 @@ namespace DiaperJungle.Models
         public int id { get; set; }
         public int order_id { get; set; }
         public int product_id { get; set; }
+        public double price { get; set; }
+        public int quantity { get; set; }
     }
 }
