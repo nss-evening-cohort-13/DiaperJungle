@@ -77,8 +77,8 @@ class Products extends React.Component {
     }
   }
 
+  // Can't clear the filtered results when a checkbox is unchecked
   filterProducts = (e) => {
-    console.warn(e);
     // getting the typed id from filter? storing it in checkedtype
     const checkedType = parseInt(e.target.value, 10);
     const { isSelectedCheckbox, products } = this.state;
@@ -151,9 +151,20 @@ class Products extends React.Component {
   }
 
   render() {
+    let productsPage;
     const { isSelectedFiltered, products } = this.state;
     const renderAllProductCards = () => products.map((product) => (<ProductCard key={product.id} product={product} />));
     const renderSelectedCards = () => isSelectedFiltered.map((product) => (<ProductCard key={product.id} product={product} />));
+
+    // Decides what get rendered on the page if the filter is empty but the checkbox and drop down are not display "No Match Found"
+    if (isSelectedFiltered.length === 0 && this.state.isSelectedDropdown.length > 0 && this.state.isSelectedCheckbox.length > 0) {
+      productsPage = <h1>No Match Found</h1>;
+    } else if (isSelectedFiltered.length > 0) {
+      productsPage = renderSelectedCards();
+    } else {
+      productsPage = renderAllProductCards();
+    }
+
     return (
       <>
         <h2>Products</h2>
@@ -168,9 +179,7 @@ class Products extends React.Component {
         </Link>
         <Button variant="warning" onClick={this.clearFilter}>Clear Filter</Button>{' '}
         <div>
-          {isSelectedFiltered.length === 0
-            ? renderAllProductCards()
-            : renderSelectedCards()}
+            {productsPage}
         </div>
       </>
     );
