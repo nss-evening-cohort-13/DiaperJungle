@@ -44,8 +44,6 @@ class App extends React.Component {
       this.setState({
         userTable: response,
       });
-    }).then(() => {
-      this.createOrder(this.state);
     });
   }
 
@@ -55,6 +53,8 @@ class App extends React.Component {
       this.setState({
         order: response,
       });
+    }).then(() => {
+      this.createOrder(this.state);
     });
   }
 
