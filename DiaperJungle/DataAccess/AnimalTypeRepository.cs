@@ -13,18 +13,18 @@ namespace DiaperJungle.DataAccess
         const string ConnectionString = "Server=localhost;Database=DiaperJungle;Trusted_Connection=True;";
 
         //Get all animal types
-        public List<AnimalType> GetAll()
+        public List<AnimalsType> GetAll()
         {
             using var db = new SqlConnection(ConnectionString);
 
             var sql = @"Select *
                         From Animal_Type";
 
-            return db.Query<AnimalType>(sql).ToList();
+            return db.Query<AnimalsType>(sql).ToList();
         }
 
         //Get single animal type
-        public AnimalType Get(int id)
+        public AnimalsType Get(int id)
         {
             using var db = new SqlConnection(ConnectionString);
 
@@ -32,13 +32,13 @@ namespace DiaperJungle.DataAccess
                         From Animal_Type
                         where Id = @id";
 
-            var prodType = db.QueryFirstOrDefault<AnimalType>(sql, new { id = id });
+            var prodType = db.QueryFirstOrDefault<AnimalsType>(sql, new { id = id });
 
             return prodType;
         }
 
         //Add animal type
-        public void Add(AnimalType animalType)
+        public void Add(AnimalsType animalType)
         {
             using var db = new SqlConnection(ConnectionString);
 
@@ -64,7 +64,7 @@ namespace DiaperJungle.DataAccess
         }
 
         //Update animal_type
-        public void Update(AnimalType animalType)
+        public void Update(AnimalsType animalType)
         {
             using var db = new SqlConnection(ConnectionString);
 
