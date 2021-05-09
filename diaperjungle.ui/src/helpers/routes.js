@@ -16,6 +16,8 @@ export default function Routes({ user }) {
         <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/orders" component={Orders} />
+            <Route exact path="/orders/:id" component={(props) => <Orders user={user} {...props} />}/>
+            <Route exact path='/order-details/:id' component={ordersSingleDetail}/>
             <Route exact path="/users" component={Users} />
             <Route exact path='/products' component={Products} />
             <Route exact path='/producttypes' component={ProductTypes}/>

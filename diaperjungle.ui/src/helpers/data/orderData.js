@@ -33,8 +33,14 @@ const addOrder = (data) => new Promise((resolve, reject) => {
     is_complete: false,
   };
   axios.post(`${OrdersUrl}`, newObj)
+    .then(resolve)
+    .catch((error) => reject(error));
+});
+
+const getAllCompletedUserOrders = (fbUid) => new Promise((resolve, reject) => {
+  axios.get(`${OrdersUrl}/history/${fbUid}`)
     .then((response) => {
-      resolve(response.data);
+      resolve(Object.values(response.data));
     }).catch((error) => reject(error));
 });
 
@@ -42,5 +48,5 @@ const addOrder = (data) => new Promise((resolve, reject) => {
 const deleteOrders = (Id) => axios.delete(`${OrdersUrl}/${Id}`);
 
 export default {
-  getAllOrders, deleteOrders, getSingleOrder, addOrder, getNotCompletedOrders
+  getAllOrders, deleteOrders, getAllCompletedUserOrders, addOrder, getNotCompletedOrders, getSingleOrder
 };

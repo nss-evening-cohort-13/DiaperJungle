@@ -41,6 +41,13 @@ namespace DiaperJungle.Controllers
             return Ok(order_Product);
         }
 
+        //GET to /api/order_product/order/{id}
+        [HttpGet("order/{orderId}")]
+        public IActionResult GetAllOrder_ProductsOfAnOrder(int orderId)
+        {
+            return Ok(_repo.GetAllProductsOfAnOrder(orderId));
+        }
+
         //DELETE /api/order_Product/{ProductTypesId}
         [HttpDelete("{productTypeId}")]
         public IActionResult DeleteProductType(int productTypeId)

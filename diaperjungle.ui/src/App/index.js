@@ -69,11 +69,17 @@ class App extends React.Component {
   }
 
   render() {
+    const { user } = this.state;
     return (
       <div className="App">
         <BrowserRouter>
+<<<<<<< HEAD
           <Navbar user={this.state.user}/>
           <Routes user={this.state.user}/>
+=======
+          <Navbar user={user}/>
+          <Routes user={user}/>
+>>>>>>> main
         </BrowserRouter>
       </div>
     );

@@ -29,6 +29,7 @@ logoutClickEvent = (e) => {
   }
 
   render() {
+    const { user } = this.props;
     return (
     <div>
       <Navbar color="dark" expand="lg">
@@ -38,9 +39,6 @@ logoutClickEvent = (e) => {
           <Nav className="link-container mr-auto" navbar>
             <NavItem>
               <Link to='/products' className="nav-link m-2" href="#">Diapers</Link>
-            </NavItem>
-            <NavItem>
-              <Link to='/orders' className="nav-link m-2" href="#">Orders</Link>
             </NavItem>
             <NavItem>
               <Link to='/users' className="nav-link m-2" href="#">Users</Link>
@@ -54,22 +52,15 @@ logoutClickEvent = (e) => {
             <NavItem>
               <Auth />
             </NavItem>
-            <NavItem>
-              <Link to='null' className="nav-link m-2" href="#" onClick={this.logoutClickEvent}>Logout</Link>
-            </NavItem>
           </Nav>
           <p className='mr-2 mt-3 text-light'>Search:</p>
             <SearchInput />
           <NavbarText>
-            {/* <div className="form-inline my-2 my-lg-0">
-                  <button className="nav-link btn btn-outline-primary" onClick={logMeOut}>Logout</button>
-            </div> */}
-            {/* for when the user auth is setup use commented code below */}
-            {/* <div className="form-inline my-2 my-lg-0">
+            <div className="form-inline my-2 my-lg-0">
                 {user && (
-                  <button className="nav-link btn btn-outline-primary" onClick={logMeOut}>Logout</button>
+                  <button className="nav-link btn btn-outline-primary" onClick={this.logoutClickEvent}>Logout</button>
                 )}
-            </div> */}
+            </div>
           </NavbarText>
         </Collapse>
       </Navbar>
