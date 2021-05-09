@@ -73,13 +73,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <BrowserRouter>
-<<<<<<< HEAD
-          <Navbar user={this.state.user}/>
-          <Routes user={this.state.user}/>
-=======
           <Navbar user={user}/>
           <Routes user={user}/>
->>>>>>> main
         </BrowserRouter>
       </div>
     );
