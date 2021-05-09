@@ -5,7 +5,7 @@ import ProductForm from './productUpdateForm';
 import productData from '../helpers/data/productData';
 import orderData from '../helpers/data/orderData';
 import cartData from '../helpers/data/cartData';
-import userData from '../helpers/data/userData';
+// import userData from '../helpers/data/userData';
 
 class ProductDetails extends Component {
     state = {
@@ -17,8 +17,6 @@ class ProductDetails extends Component {
     componentDidMount() {
       const productId = this.props.match.params.id;
       this.getASingleProduct(productId);
-      this.checkIfUserHasAnIncompleteOrder(this.props.user.uid);
-      this.setUserInState(this.props.user.uid);
     }
 
     getASingleProduct = (productId) => {
@@ -32,22 +30,6 @@ class ProductDetails extends Component {
     removeProducts = () => {
       productData.deleteProducts(this.state.products.id).then(() => {
         this.props.history.goBack();
-      });
-    }
-
-    // checkIfUserHasAnIncompleteOrder = (fbUid) => {
-    //   orderData.getNotCompletedOrders(fbUid).then((response) => {
-    //     this.setState({
-    //       order: response,
-    //     });
-    //   });
-    // }
-
-    setUserInState = (fbUid) => {
-      userData.getUserByFBUid(fbUid).then((response) => {
-        this.setState({
-          user: response,
-        });
       });
     }
 
