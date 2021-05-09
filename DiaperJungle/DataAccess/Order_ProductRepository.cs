@@ -37,7 +37,6 @@ namespace DiaperJungle.DataAccess
             return prodType;
         }
 
-<<<<<<< HEAD
         // get user by fb_uid
         public User GetCartByFBUid(string fb_uid)
         {
@@ -50,7 +49,7 @@ namespace DiaperJungle.DataAccess
             var singleUser = db.QueryFirstOrDefault<User>(sql, new { fb_uid = fb_uid });
 
             return singleUser;
-=======
+        }
         //Get products from an order
         public List<Order_Product> GetAllProductsOfAnOrder(int orderId)
         {
@@ -61,7 +60,6 @@ namespace DiaperJungle.DataAccess
                         Where op.order_id = @orderId";
 
             return db.Query<Order_Product>(sql, new { orderId = orderId }).ToList();
->>>>>>> main
         }
 
         //Delete Order_Product

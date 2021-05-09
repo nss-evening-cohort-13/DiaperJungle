@@ -59,13 +59,12 @@ namespace DiaperJungle.Controllers
             return Ok();
         }
 
-<<<<<<< HEAD
         [HttpGet("{fb_uid}/cart")]
         public IActionResult GetOrdersByFBUID(string fb_uid)
         {
             var orders = _repo.GetOrdersByUserId(fb_uid);
-            
-            foreach(var order in orders)
+
+            foreach (var order in orders)
             {
                 if (order.is_complete != true)
                 {
@@ -74,13 +73,13 @@ namespace DiaperJungle.Controllers
             }
 
             return NoContent();
-=======
+        }
+
         //Get completed user orders
         [HttpGet("history/{fb_uid}")]
         public IActionResult GetAllUserCompletedOrders(string fb_uid)
         {
             return Ok(_repo.GetAllUserOrderHistory(fb_uid));
->>>>>>> main
         }
     }
 }
