@@ -147,6 +147,10 @@ class Products extends React.Component {
       this.setState({
         isSelectedFiltered: animalFilterArray,
       });
+    } else {
+      this.setState({
+        isSelectedFiltered: [],
+      });
     }
   }
 
