@@ -23,14 +23,13 @@ class App extends React.Component {
         // grabs the auth token use sessionStorage.getItem("token") to grab it
         user.getIdToken().then((token) => sessionStorage.setItem('token', token));
         this.setState({ user });
-        this.checkIfUserHasAnIncompleteOrder(user.uid);
-        this.setUserInState(user.uid);
-        // this.createOrder(this.state);
+        setTimeout(() => {
+          this.setUserInState(user.uid);
+        }, 1000);
       } else {
         this.setState({ user: false });
       }
     });
-    // this.createOrder(this.state);
   }
 
   // when app unloads kill the listener
@@ -39,22 +38,24 @@ class App extends React.Component {
   }
 
   setUserInState = (fbUid) => {
-    console.warn('setUserInState function');
     userData.getUserByFBUid(fbUid).then((response) => {
       this.setState({
         userTable: response,
       });
+    }).then(() => {
+      this.checkIfUserHasAnIncompleteOrder(fbUid);
     });
   }
 
   checkIfUserHasAnIncompleteOrder = (fbUid) => {
-    console.warn('checkIfUserHasAnIncompleteOrder function');
     orderData.getNotCompletedOrders(fbUid).then((response) => {
       this.setState({
         order: response,
       });
     }).then(() => {
-      this.createOrder(this.state);
+      setTimeout(() => {
+        this.createOrder(this.state);
+      }, 1000);
     });
   }
 
@@ -62,7 +63,7 @@ class App extends React.Component {
     if (Object.keys(this.state.order).length === 0) {
       orderData.addOrder(this.state).then((response) => {
         this.setState({
-          order: response,
+          order: response.data,
         });
       });
     }
