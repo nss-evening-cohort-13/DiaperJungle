@@ -9,4 +9,10 @@ const getAllUsers = () => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export default { getAllUsers };
+const getUserByFBUid = (fbUid) => new Promise((resolve, reject) => {
+  axios.get(`${userUrl}/fb/${fbUid}`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
+export default { getAllUsers, getUserByFBUid };

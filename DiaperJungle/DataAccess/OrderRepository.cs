@@ -34,14 +34,34 @@ namespace DiaperJungle.DataAccess
             using var db = new SqlConnection(ConnectionString);
             var orderId = db.ExecuteScalar<int>(sql, order);
 
-            foreach (var item in order.Product)
-            {
-                var productInsert = @"INSERT INTO [dbo].[Order_Product] ([order_id], [product_id])
-                                      VALUES (@orderId, @id)";
-
-                db.Execute(productInsert, new { orderId, item.id });
-            }
             order.id = orderId;
+
+            //foreach (var item in order.Product)
+            //{
+            //    var productInsert = @"INSERT INTO [dbo].[Order_Product] ([order_id], [product_id], [price], [quantity])
+            //                          VALUES (@orderId, @product_id, @price, @quantity)";
+
+            //    db.Execute(productInsert, new { orderId, item });
+            //}
+            
+        }
+
+        //Get orders by user id
+
+        public List<Order> GetOrdersByUserId(string fb_uid)
+        {
+            var sql = @"Select *
+                        From [User] u
+	                        Join Orders o
+	                        ON o.user_id = u.id
+	                        Where u.fb_uid = @fb_uid ";
+
+            //create a connection
+            using var db = new SqlConnection(ConnectionString);
+
+            var order = db.Query<Order>(sql, new { fb_uid = fb_uid }).ToList();
+
+            return order;
         }
 
         //Get a single order

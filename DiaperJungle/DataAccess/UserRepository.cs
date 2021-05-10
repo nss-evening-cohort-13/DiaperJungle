@@ -79,5 +79,19 @@ namespace DiaperJungle.DataAccess
 
             db.Execute(sql, user);
         }
+
+        // get user by fb_uid
+        public User GetByFBUid(string fb_uid)
+        {
+            var sql = @"SELECT *
+                        FROM [User]
+                        WHERE fb_uid = @fb_uid";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var singleUser = db.QueryFirstOrDefault<User>(sql, new { fb_uid = fb_uid });
+
+            return singleUser;
+        }
     }
 }

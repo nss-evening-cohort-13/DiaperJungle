@@ -37,6 +37,19 @@ namespace DiaperJungle.DataAccess
             return prodType;
         }
 
+        // get user by fb_uid
+        public User GetCartByFBUid(string fb_uid)
+        {
+            var sql = @"SELECT *
+                        FROM [User]
+                        WHERE fb_uid = @fb_uid";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var singleUser = db.QueryFirstOrDefault<User>(sql, new { fb_uid = fb_uid });
+
+            return singleUser;
+        }
         //Get products from an order
         public List<Order_Product> GetAllProductsOfAnOrder(int orderId)
         {
@@ -61,5 +74,19 @@ namespace DiaperJungle.DataAccess
             db.Execute(sql, new { id });
         }
 
+        //Add Product to Order_Product
+        public void Add(Order_Product order_product)
+        {
+            var sql = @"INSERT INTO [Order_Product] ([order_id], [product_id], [price], [quantity])
+                                                OUTPUT inserted.id
+                                                VALUES(@order_id, @product_id, @price, @quantity)";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var id = db.ExecuteScalar<int>(sql, order_product);
+
+
+            order_product.id = id;
+        }
     }
 }

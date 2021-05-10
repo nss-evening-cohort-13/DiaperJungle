@@ -19,6 +19,24 @@ const getSingleOrder = (Id) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+// Gets orders that are not completed to load the cart
+const getNotCompletedOrders = (fbUid) => new Promise((resolve, reject) => {
+  axios.get(`${OrdersUrl}/${fbUid}/cart`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
+const addOrder = (data) => new Promise((resolve, reject) => {
+  const objData = data;
+  const newObj = {
+    user_id: objData.userTable.id,
+    is_complete: false,
+  };
+  axios.post(`${OrdersUrl}`, newObj)
+    .then(resolve)
+    .catch((error) => reject(error));
+});
+
 const getAllCompletedUserOrders = (fbUid) => new Promise((resolve, reject) => {
   axios.get(`${OrdersUrl}/history/${fbUid}`)
     .then((response) => {
@@ -30,8 +48,5 @@ const getAllCompletedUserOrders = (fbUid) => new Promise((resolve, reject) => {
 const deleteOrders = (Id) => axios.delete(`${OrdersUrl}/${Id}`);
 
 export default {
-  getAllOrders,
-  deleteOrders,
-  getSingleOrder,
-  getAllCompletedUserOrders
+  getAllOrders, deleteOrders, getAllCompletedUserOrders, addOrder, getNotCompletedOrders, getSingleOrder
 };
