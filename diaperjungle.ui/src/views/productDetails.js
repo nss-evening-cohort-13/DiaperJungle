@@ -3,14 +3,13 @@ import { Button } from 'reactstrap';
 import Modal from '../components/modal';
 import ProductForm from './productUpdateForm';
 import productData from '../helpers/data/productData';
-import orderData from '../helpers/data/orderData';
 import cartData from '../helpers/data/cartData';
 // import userData from '../helpers/data/userData';
 
 class ProductDetails extends Component {
     state = {
       products: {},
-      order: {},
+      order: this.props.order,
       user: {}
     }
 
@@ -35,13 +34,7 @@ class ProductDetails extends Component {
 
     addToCart = (e) => {
       e.preventDefault();
-      if (this.state.order === '') {
-        orderData.addOrder(this.state).then(() => {
-          console.warn('Order created');
-        });
-      } else {
-        cartData.addToOrderProduct(this.state);
-      }
+      cartData.addToOrderProduct(this.state);
     }
 
     render() {
