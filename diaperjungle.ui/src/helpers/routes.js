@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Home from '../views/home';
 import Orders from '../views/orders';
 import Products from '../views/products';
-import Users from '../views/users';
+import Profile from '../views/profile';
 import ProductTypes from '../views/productTypes';
 import ProductDetails from '../views/productDetails';
 import ProductForm from '../views/productAddForm';
@@ -17,7 +17,7 @@ export default function Routes({ user }) {
             <Route exact path="/orders" component={Orders} />
             <Route exact path="/orders/:id" component={(props) => <Orders user={user} {...props} />}/>
             <Route exact path='/order-details/:id' component={ordersSingleDetail}/>
-            <Route exact path="/users" component={Users} />
+            <Route exact path="/profile" component={Profile} />
             <Route exact path='/products' component={Products} />
             <Route exact path='/producttypes' component={ProductTypes}/>
             <Route exact path='/products/:id' component={ProductDetails}/>

@@ -41,7 +41,7 @@ logoutClickEvent = (e) => {
               <Link to='/products' className="nav-link m-2" href="#">Diapers</Link>
             </NavItem>
             <NavItem>
-              <Link to='/users' className="nav-link m-2" href="#">Users</Link>
+              <Link to='/Profile' className="nav-link m-2" href="#">Profile</Link>
             </NavItem>
             <NavItem>
               <Link to='/producttypes' className="nav-link m-2" href="#">Product Types</Link>

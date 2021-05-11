@@ -23,6 +23,7 @@ export default class Users extends React.Component {
 
     const userInfo = (user) => (
       <div>
+        {console.warn(this.props.user)}
         <h2>{user.first_name} {user.last_name}</h2>
         <h3>Username: {user.username}</h3>
         <h3>Password: {user.password}</h3>
