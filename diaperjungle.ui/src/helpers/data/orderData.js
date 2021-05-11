@@ -41,6 +41,7 @@ const getAllCompletedUserOrders = (fbUid) => new Promise((resolve, reject) => {
   axios.get(`${OrdersUrl}/history/${fbUid}`)
     .then((response) => {
       resolve(Object.values(response.data));
+      console.warn(response.data);
     }).catch((error) => reject(error));
 });
 

@@ -1,11 +1,8 @@
 import React from 'react';
 import { CardGroup } from 'react-bootstrap';
-import {
-  Card, CardText, CardBody,
-  CardTitle,
-} from 'reactstrap';
-import { Link } from 'react-router-dom';
 import orderData from '../helpers/data/orderData';
+// import payTypeData from '../helpers/data/payTypesData';
+import OrderCard from '../components/orderCard';
 
 class Orders extends React.Component {
   state = {
@@ -25,30 +22,19 @@ class Orders extends React.Component {
     });
   }
 
+  // getPaymentType = (payTypeId) => {
+  //   payTypeData.getPayTypeById(payTypeId).then((response) => response.pay_type);
+  // }
+
   render() {
     const { orders } = this.state;
-
-    const orderCard = (order) => (
-      <div>
-      <Card>
-        <CardBody>
-          <CardTitle tag="h5">Id: {order.id}</CardTitle>
-          <CardText>Pay_Type: {order.pay_type}</CardText>
-          <CardText>User_Id: {order.user_id}</CardText>
-          <CardText>Total_Cost: ${order.total_cost}</CardText>
-          <Link className="btn btn-primary" to={`/order-details/${order.id}`}>Order Single view</Link>{' '}
-        </CardBody>
-      </Card>
-    </div>
-    );
-      // creates a new array of cards with the data of Order
-    const cards = orders.map(orderCard);
+    const renderAllOrderCards = () => orders.map((order) => <OrderCard key={order.id} order={order}/>);
 
     return (
       <>
         <h2>Orders</h2>
         <CardGroup>
-          {cards}
+          {renderAllOrderCards()}
         </CardGroup>
       </>
     );
