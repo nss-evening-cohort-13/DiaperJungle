@@ -23,4 +23,8 @@ const getUserCart = (fbUid) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
+// const addProductToCart = () => new Promise((resolve, reject) => {
+//     axios.post
+// })
+
 export default { addToOrderProduct, getUserCart };
