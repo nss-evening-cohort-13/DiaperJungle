@@ -3,7 +3,7 @@ import { CardGroup } from 'react-bootstrap';
 import orderData from '../helpers/data/orderData';
 import OrderCard from '../components/orderCard';
 
-class Orders extends React.Component {
+export default class AdminOrders extends React.Component {
   state = {
     orders: [],
   };
@@ -20,7 +20,7 @@ class Orders extends React.Component {
       });
     });
   }
-
+  
   render() {
     const { orders } = this.state;
     const renderAllOrderCards = () => orders.map((order) => <OrderCard key={order.id} order={order}/>);
@@ -35,5 +35,3 @@ class Orders extends React.Component {
     );
   }
 }
-
-export default Orders;
