@@ -40,6 +40,19 @@ namespace DiaperJungle.Controllers
 
             return Ok(order_Product);
         }
+        //GET to /api/Order_Product/{id}
+        [HttpGet("fb/{fb_uid}")]
+        public IActionResult GetCartByFBUid(string fb_uid)
+        {
+            var order_Product = _repo.GetCartByFBUid(fb_uid);
+
+            if (order_Product == null)
+            {
+                return NotFound("Cart is empty");
+            }
+
+            return Ok(order_Product);
+        }
 
         //GET to /api/order_product/order/{id}
         [HttpGet("order/{orderId}")]

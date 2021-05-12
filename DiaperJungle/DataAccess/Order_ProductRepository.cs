@@ -38,18 +38,24 @@ namespace DiaperJungle.DataAccess
         }
 
         // get user by fb_uid
-        public User GetCartByFBUid(string fb_uid)
+        public List<Order_Product> GetCartByFBUid(string fb_uid)
         {
-            var sql = @"SELECT *
-                        FROM [User]
-                        WHERE fb_uid = @fb_uid";
-
             using var db = new SqlConnection(ConnectionString);
 
-            var singleUser = db.QueryFirstOrDefault<User>(sql, new { fb_uid = fb_uid });
+            var sql = @"Select *
+                        from Order_Product op
+	                        join Orders o
+	                        ON op.order_id = o.id
+	                            join Product p
+	                            ON op.product_id = p.id
+		                            join [User] u
+		                            ON o.user_id = u.id
+		                                Where u.fb_uid = @fb_uid
+		                                AND o.is_complete = 0";
 
-            return singleUser;
+            return db.Query<Order_Product>(sql).ToList();
         }
+        
         //Get products from an order
         public List<Order_Product> GetAllProductsOfAnOrder(int orderId)
         {
