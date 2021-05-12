@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from '../views/home';
 import Orders from '../views/orders';
 import Products from '../views/products';
@@ -10,6 +10,7 @@ import ProductForm from '../views/productAddForm';
 import SearchResults from '../views/searchResults';
 import ordersSingleDetail from '../views/ordersSingleDetails';
 import Cart from '../views/cart';
+import Admin from '../views/admin';
 
 export default function Routes({ user, userTable, order }) {
   return (
@@ -26,6 +27,15 @@ export default function Routes({ user, userTable, order }) {
             <Route exact path='/search/:term' component={(props) => <SearchResults {...props}/>} />
             <Route exact path='/orders/:id' component={ordersSingleDetail}/>
             <Route exact path='/cart' component={(props) => <Cart user={user} order={order} userTable={userTable} {...props}/>}/>
+            <PrivateRoute exact path='/admin' component={Admin} user={user}/>
         </Switch>
   );
 }
+
+const PrivateRoute = ({ component: Component, user, ...rest }) => {
+  const routeChecker = (taco) => (user
+    ? (<Component {...taco} user={user} />)
+    : (<Redirect to={ { pathname: '/no-user', state: { from: taco.location } }} />));
+
+  return <Route {...rest} render={(props) => routeChecker(props)} />;
+};

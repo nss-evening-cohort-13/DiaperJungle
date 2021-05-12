@@ -29,7 +29,7 @@ logoutClickEvent = (e) => {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, dbUser } = this.props;
     return (
     <div>
       <Navbar color="dark" expand="lg">
@@ -50,7 +50,12 @@ logoutClickEvent = (e) => {
               <Link to='/cart' className="nav-link m-2" href="#">Cart</Link>
             </NavItem>
             <NavItem>
-              <Auth />
+                <Auth />
+            </NavItem>
+            <NavItem>
+              {dbUser.is_admin && user && (
+                <Link to='/admin' className="nav-link m-2" href="#">Admin</Link>
+              )}
             </NavItem>
           </Nav>
           <p className='mr-2 mt-3 text-light'>Search:</p>

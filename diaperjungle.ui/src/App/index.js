@@ -14,6 +14,7 @@ class App extends React.Component {
   state = {
     user: null,
     order: {},
+    dbUser: {},
   };
 
   // When the user logs in do this if not set user to false
@@ -23,6 +24,9 @@ class App extends React.Component {
         // grabs the auth token use sessionStorage.getItem("token") to grab it
         user.getIdToken().then((token) => sessionStorage.setItem('token', token));
         this.setState({ user });
+        userData.getUserByFBUid(user.uid).then((currentUser) => {
+          this.setState({ dbUser: currentUser });
+        });
         setTimeout(() => {
           this.setUserInState(user.uid);
         }, 1000);
@@ -70,12 +74,17 @@ class App extends React.Component {
   }
 
   render() {
-    const { user, userTable, order } = this.state;
+    const {
+      user,
+      userTable,
+      order,
+      dbUser
+    } = this.state;
     return (
       <div className="App">
         <BrowserRouter>
-          <Navbar user={user}/>
-          <Routes user={user} userTable={userTable} order={order}/>
+          <Navbar user={user} dbUser={dbUser} />
+          <Routes user={user} dbUser={dbUser} userTable={userTable} order={order}/>
         </BrowserRouter>
       </div>
     );
