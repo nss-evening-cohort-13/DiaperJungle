@@ -44,9 +44,22 @@ const getAllCompletedUserOrders = (fbUid) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
+const getAllCompletedOrders = () => new Promise((resolve, reject) => {
+  axios.get(`${OrdersUrl}/history`)
+    .then((response) => {
+      resolve(response.data);
+    }).catch((error) => reject(error));
+});
+
 // Deletes a single order base on id and remove it
 const deleteOrders = (Id) => axios.delete(`${OrdersUrl}/${Id}`);
 
 export default {
-  getAllOrders, deleteOrders, getAllCompletedUserOrders, addOrder, getNotCompletedOrders, getSingleOrder
+  getAllOrders,
+  deleteOrders,
+  getAllCompletedUserOrders,
+  addOrder,
+  getNotCompletedOrders,
+  getSingleOrder,
+  getAllCompletedOrders,
 };
