@@ -14,6 +14,7 @@ class App extends React.Component {
   state = {
     user: null,
     order: {},
+    userTable: {},
   };
 
   // When the user logs in do this if not set user to false
@@ -70,12 +71,12 @@ class App extends React.Component {
   }
 
   render() {
-    const { user } = this.state;
+    const { user, userTable, order } = this.state;
     return (
       <div className="App">
         <BrowserRouter>
           <Navbar user={user}/>
-          <Routes user={user}/>
+          <Routes user={user} userTable={userTable} order={order}/>
         </BrowserRouter>
       </div>
     );
