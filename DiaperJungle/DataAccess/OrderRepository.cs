@@ -64,6 +64,25 @@ namespace DiaperJungle.DataAccess
             return order;
         }
 
+        public List<DetailedOrder> GetDetailedOrderHistory(string fb_uid)
+        {
+            var sql = @"Select o.id, o.total_cost, o.user_id, o.is_complete, u.fb_uid, pt.account_number, u.first_name, u.last_name, pt.pay_type, pt.id as pay_type_id
+                        From [User] u
+                        Join Orders o
+                        On o.user_id = u.id
+                        join Payment_Type pt
+                        on o.pay_type = pt.id
+                        Where u.fb_uid = @fb_uid
+                        And o.is_complete = 1";
+
+            //create a connection
+            using var db = new SqlConnection(ConnectionString);
+
+            var order = db.Query<DetailedOrder>(sql, new { fb_uid = fb_uid }).ToList();
+
+            return order;
+        }
+
         //Get a single order
         public Order Get(int id)
         {
@@ -89,20 +108,6 @@ namespace DiaperJungle.DataAccess
             using var db = new SqlConnection(ConnectionString);
 
             db.Execute(sql, new { id });
-        }
-        //Get User Orders already Complete
-        public List<Order> GetAllUserOrderHistory(string fb_uid)
-        {
-            using var db = new SqlConnection(ConnectionString);
-
-            var sql = @"Select *
-                        From [User] u
-	                    Join Orders o
-	                    On o.user_id = u.id
-	                    Where u.fb_uid = @fb_uid
-	                    And o.is_complete = 1";
-
-            return db.Query<Order>(sql, new { fb_uid = fb_uid }).ToList();
         }
     }
 }

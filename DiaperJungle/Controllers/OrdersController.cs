@@ -79,7 +79,7 @@ namespace DiaperJungle.Controllers
         [HttpGet("history/{fb_uid}")]
         public IActionResult GetAllUserCompletedOrders(string fb_uid)
         {
-            return Ok(_repo.GetAllUserOrderHistory(fb_uid));
+            return Ok(_repo.GetDetailedOrderHistory(fb_uid));
         }
     }
 }

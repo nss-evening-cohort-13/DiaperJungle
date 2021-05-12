@@ -11,7 +11,6 @@ const addToOrderProduct = (data) => new Promise((resolve, reject) => {
     price: objData.products.price,
     quantity: 1
   };
-  console.warn(newObj);
   axios.post(`${cartUrl}`, newObj)
     .then(resolve)
     .catch((error) => reject(error));
