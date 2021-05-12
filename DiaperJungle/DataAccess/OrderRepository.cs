@@ -66,7 +66,7 @@ namespace DiaperJungle.DataAccess
 
         public List<DetailedOrder> GetDetailedOrderHistory(string fb_uid)
         {
-            var sql = @"Select *
+            var sql = @"Select o.id, o.total_cost, o.user_id, o.is_complete, u.fb_uid, pt.account_number, u.first_name, u.last_name, pt.pay_type, pt.id as pay_type_id
                         From [User] u
                         Join Orders o
                         On o.user_id = u.id
