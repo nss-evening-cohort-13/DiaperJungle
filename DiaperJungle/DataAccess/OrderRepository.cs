@@ -72,7 +72,7 @@ namespace DiaperJungle.DataAccess
                         On o.user_id = u.id
                         join Payment_Type pt
                         on o.pay_type = pt.id
-                        Where u.fb_uid = 'Bb0IAM5PkEhUgHm99EnrOkyMpps2'
+                        Where u.fb_uid = @fb_uid
                         And o.is_complete = 1";
 
             //create a connection

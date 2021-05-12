@@ -59,7 +59,7 @@ namespace DiaperJungle.DataAccess
                         From Order_Product op
                         join Product p
                         on op.product_id = p.id
-                        Where op.order_id = 1";
+                        Where op.order_id = @orderId";
 
             return db.Query<DetailedOrderProduct>(sql, new { orderId = orderId }).ToList();
         }
