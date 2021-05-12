@@ -57,15 +57,17 @@ namespace DiaperJungle.DataAccess
         }
         
         //Get products from an order
-        public List<Order_Product> GetAllProductsOfAnOrder(int orderId)
+        public List<DetailedOrderProduct> GetAllProductsOfAnOrder(int orderId)
         {
             using var db = new SqlConnection(ConnectionString);
 
-            var sql = @"Select *
+            var sql = @"Select op.*, p.title, p.description, p.image_url
                         From Order_Product op
+                        join Product p
+                        on op.product_id = p.id
                         Where op.order_id = @orderId";
 
-            return db.Query<Order_Product>(sql, new { orderId = orderId }).ToList();
+            return db.Query<DetailedOrderProduct>(sql, new { orderId = orderId }).ToList();
         }
 
         //Delete Order_Product

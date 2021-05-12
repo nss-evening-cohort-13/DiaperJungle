@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import orderData from '../helpers/data/orderData';
 import orderProductData from '../helpers/data/orderProductData';
-import productData from '../helpers/data/productData';
+// import productData from '../helpers/data/productData';
 import ProductCard from '../components/productCard';
 
 class OrderSingleDetails extends Component {
@@ -30,14 +30,8 @@ class OrderSingleDetails extends Component {
 
     getOrderProductIds = (orderId) => {
       orderProductData.getProductsOfAnOrder(orderId).then((response) => {
-        const newProducts = [];
-        response.forEach((item) => {
-          productData.getSingleProduct(item.product_id).then((response2) => {
-            newProducts.push(response2);
-          });
-        });
         this.setState({
-          products: newProducts,
+          products: response,
         });
       });
     }
@@ -57,8 +51,7 @@ class OrderSingleDetails extends Component {
       return (
             <div>
                 <h1>This is the single order view</h1>
-                <h2>Order Id: {order.id}</h2>
-                <h3>User Id:{order.user_id}</h3>
+                <h2>Order #{order.id}</h2>
                 <Button color="danger" onClick={this.removeOrder}>Remove Order</Button>{' '}
                 {renderAllProductCards()}
             </div>
