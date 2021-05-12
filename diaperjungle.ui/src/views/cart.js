@@ -1,5 +1,5 @@
 import React from 'react';
-// import orderData from '../helpers/data/orderData';
+import CartCard from '../components/cartCard';
 
 class Cart extends React.Component {
     state = {
@@ -12,6 +12,7 @@ class Cart extends React.Component {
       return (
             <>
               <h2>The Cart</h2>
+              <CartCard />
             </>
       );
     }

@@ -23,11 +23,11 @@ export default function Routes({ user, userTable, order }) {
             <Route exact path="/users" component={(props) => <Users user={user} userTable={userTable} order={order} {...props}/>} />
             <Route exact path='/products' component={Products} />
             <Route exact path='/producttypes' component={ProductTypes}/>
-            <Route exact path='/products/:id' component={(props) => <ProductDetails user={user} {...props} />}/>
+            <Route exact path='/products/:id' component={(props) => <ProductDetails user={user} order={order} {...props} />}/>
             <Route exact path='/product-form' component={(props) => <ProductForm {...props} />}/>
             <Route exact path='/search/:term' component={(props) => <SearchResults {...props}/>} />
             <Route exact path='/orders/:id' component={ordersSingleDetail}/>
-            <Route exact path='/cart' component={Cart}/>
+            <Route exact path='/cart' component={(props) => <Cart user={user} order={order} userTable={userTable} {...props}/>}/>
         </Switch>
   );
 }

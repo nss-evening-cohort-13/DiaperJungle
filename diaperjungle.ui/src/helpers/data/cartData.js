@@ -11,7 +11,6 @@ const addToOrderProduct = (data) => new Promise((resolve, reject) => {
     price: objData.products.price,
     quantity: 1
   };
-  console.warn(newObj);
   axios.post(`${cartUrl}`, newObj)
     .then(resolve)
     .catch((error) => reject(error));
@@ -22,5 +21,9 @@ const getUserCart = (fbUid) => new Promise((resolve, reject) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });
+
+// const addProductToCart = () => new Promise((resolve, reject) => {
+//     axios.post
+// })
 
 export default { addToOrderProduct, getUserCart };
