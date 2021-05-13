@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { baseUrl } from '../config.json';
 
-const paymentTypeUrl = `${baseUrl}/payment_type`;
+const paymentTypeUrl = `${baseUrl}/PaymentTypes`;
 
 const getAllPaymentTypes = () => new Promise((resolve, reject) => {
   axios.get(`${paymentTypeUrl}`).then((response) => {
@@ -9,4 +9,6 @@ const getAllPaymentTypes = () => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export default { getAllPaymentTypes };
+const deletePaymentType = (Id) => axios.delete(`${paymentTypeUrl}/${Id}`);
+
+export default { getAllPaymentTypes, deletePaymentType };
