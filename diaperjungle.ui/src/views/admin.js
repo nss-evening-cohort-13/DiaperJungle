@@ -24,10 +24,20 @@ export default class Admin extends React.Component {
     const { orders } = this.state;
     const renderAllOrderCards = () => orders.map((order) => <OrderCard key={order.id} order={order}/>);
 
+    let orderTotal;
+    if (orders.length !== 0) {
+      let total = 0;
+      orders.forEach((item) => {
+        total += (item.total_cost);
+      });
+      orderTotal = total;
+    }
+
     return (
       <>
         <h2>Admin</h2>
         <CardGroup>
+        <h2>Total Of All Orders: ${`${orderTotal}`}</h2>
           {renderAllOrderCards()}
         </CardGroup>
       </>
