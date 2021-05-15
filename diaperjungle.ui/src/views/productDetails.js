@@ -52,7 +52,9 @@ class ProductDetails extends Component {
                     )}
                   </Modal>
                 )}
-                <Button color="success" onClick={this.addToCart}>Add To Cart</Button>{' '}
+                {this.props.user && (
+                  <Button color="success" onClick={this.addToCart}>Add To Cart</Button>
+                )}
             </div>
       );
     }

@@ -109,5 +109,21 @@ namespace DiaperJungle.DataAccess
 
             db.Execute(sql, new { id });
         }
+
+        //Returns ALL completed orders
+        public List<DetailedOrder> GetAllCompleted()
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"Select o.id, o.total_cost, o.user_id, o.is_complete, u.fb_uid, pt.account_number, u.first_name, u.last_name, pt.pay_type, pt.id as pay_type_id
+                        From [User] u
+                        Join Orders o
+                        On o.user_id = u.id
+                        join Payment_Type pt
+                        on o.pay_type = pt.id
+                        Where o.is_complete = 1";
+
+            return db.Query<DetailedOrder>(sql).ToList();
+        }
     }
 }

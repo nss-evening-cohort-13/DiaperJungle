@@ -9,6 +9,8 @@ export default function ProductCard({ product }) {
           <h5 className='card-title'>{product.title}</h5>
           <div className='card-body'>
           <p className='card-text'>{product.description}</p>
+          <p>${product.price}</p>
+          <p>Quantity: {product.quantity}</p>
           </div>
           <Link className='btn btn-primary m-2' to={`/products/${product.id}`}>Product Details</Link>{' '}
         </div>

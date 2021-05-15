@@ -5,3 +5,26 @@
 body {
   background-color: $favColor;
 }
+
+.order-cards-container {
+  display: flex;
+  justify-content: center;
+}
+
+.home-cards-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center ;
+}
+
+.product-cards-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center ;
+}
+
+.single-order-cards{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center ;
+}
