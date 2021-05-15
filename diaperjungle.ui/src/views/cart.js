@@ -1,18 +1,29 @@
 import React from 'react';
-import CartCard from '../components/cartCard';
+import CartCard from '../components/cartCard2';
+import cartData from '../helpers/data/cartData';
 
 class Cart extends React.Component {
     state = {
-      orders: [],
+      order: this.props.order,
+      user: this.props.user,
     };
 
-    componentDidMount() { }
+    componentDidMount() {
+      this.getUserCartItems(this.state.order.fb_uid);
+    }
+
+    getUserCartItems = (fbUid) => {
+      cartData.getUserCart(fbUid).then((response) => {
+        this.setState({
+          cart: response
+        });
+      });
+    }
 
     render() {
       return (
             <>
-              <h2>The Cart</h2>
-              <CartCard />
+          <CartCard cart={this.state.cart} user={this.state.user}/>
             </>
       );
     }

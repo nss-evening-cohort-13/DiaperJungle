@@ -38,18 +38,24 @@ namespace DiaperJungle.DataAccess
         }
 
         // get user by fb_uid
-        public User GetCartByFBUid(string fb_uid)
+        public List<Order_Product> GetCartByFBUid(string fb_uid)
         {
-            var sql = @"SELECT *
-                        FROM [User]
-                        WHERE fb_uid = @fb_uid";
-
             using var db = new SqlConnection(ConnectionString);
 
-            var singleUser = db.QueryFirstOrDefault<User>(sql, new { fb_uid = fb_uid });
+            var sql = @"Select op.*
+                        from Order_Product op
+	                        join Orders o
+	                        ON op.order_id = o.id
+	                            join Product p
+	                            ON op.product_id = p.id
+		                            join [User] u
+		                            ON o.user_id = u.id
+		                                Where u.fb_uid = @fb_uid
+		                                AND o.is_complete = 0";
 
-            return singleUser;
+            return db.Query<Order_Product>(sql, new { fb_uid = fb_uid }).ToList();
         }
+        
         //Get products from an order
         public List<DetailedOrderProduct> GetAllProductsOfAnOrder(int orderId)
         {
@@ -79,9 +85,9 @@ namespace DiaperJungle.DataAccess
         //Add Product to Order_Product
         public void Add(Order_Product order_product)
         {
-            var sql = @"INSERT INTO [Order_Product] ([order_id], [product_id], [price], [quantity])
+            var sql = @"INSERT INTO [Order_Product] ([order_id], [product_id], [price], [units], [product_desc])
                                                 OUTPUT inserted.id
-                                                VALUES(@order_id, @product_id, @price, @quantity)";
+                                                VALUES(@order_id, @product_id, @price, @units, @product_desc)";
 
             using var db = new SqlConnection(ConnectionString);
 
