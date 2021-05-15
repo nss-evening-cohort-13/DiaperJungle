@@ -15,6 +15,7 @@ class App extends React.Component {
     user: null,
     order: {},
     dbUser: {},
+    userTable: {},
   };
 
   // When the user logs in do this if not set user to false
