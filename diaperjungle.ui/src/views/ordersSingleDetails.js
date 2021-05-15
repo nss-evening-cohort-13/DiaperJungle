@@ -53,7 +53,7 @@ class OrderSingleDetails extends Component {
                 <h1>This is the single order view</h1>
                 <h2>Order #{order.id}</h2>
                 <Button color="danger" onClick={this.removeOrder}>Remove Order</Button>{' '}
-                {renderAllProductCards()}
+                <div className='single-order-cards'>{renderAllProductCards()}</div>
             </div>
       );
     }

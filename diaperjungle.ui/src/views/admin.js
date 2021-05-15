@@ -36,8 +36,8 @@ export default class Admin extends React.Component {
     return (
       <>
         <h2>Admin</h2>
-        <CardGroup>
         <h2>Total Of All Orders: ${`${orderTotal}`}</h2>
+        <CardGroup className='order-cards-container'>
           {renderAllOrderCards()}
         </CardGroup>
       </>
