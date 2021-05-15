@@ -12,10 +12,17 @@ export default class PaymentTypeForm extends React.Component {
   state = {
     paymentTypes: [],
     addPay: false,
+    user_id: this.props.userTable.id,
   };
 
   componentDidMount() {
     this.getAllOfThePaymentTypes();
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.type !== 'text' ? parseInt(e.target.value, 10) : e.target.value
+    });
   }
 
   getAllOfThePaymentTypes = () => {
@@ -32,17 +39,22 @@ export default class PaymentTypeForm extends React.Component {
     });
   };
 
-  removePaymentForm = () => {
-    this.setState({
-      addPay: false,
-    });
-  };
-
   removePaymentType = (id) => {
     paymentTypeData.deletePaymentType(id).then(() => {
       this.getAllOfThePaymentTypes();
     });
   };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({
+      addPay: false,
+    });
+    console.warn(this.state);
+    paymentTypeData.addPaymentType(this.state).then(() => {
+      this.getAllOfThePaymentTypes();
+    });
+  }
 
   render() {
     const { paymentTypes } = this.state;
@@ -61,13 +73,13 @@ export default class PaymentTypeForm extends React.Component {
             <Form>
               <Form.Group controlId='formBasicEmail'>
                 <Form.Label>Payment Type</Form.Label>
-                <Form.Control type='text' placeholder='Visa' />
+                <Form.Control type='text' name='pay_type' value={this.state.pay_type} onChange={this.handleChange} required/>
               </Form.Group>
               <Form.Group controlId='formBasicPassword'>
                 <Form.Label>Card #</Form.Label>
-                <Form.Control type='text' placeholder='12232432' />
+                <Form.Control type='number' name='account_number' value={this.state.account_number} onChange={this.handleChange} required/>
               </Form.Group>
-              <Button variant='primary' type='submit' onClick={this.removePaymentForm}>
+              <Button variant='primary' type='submit' onClick={this.handleSubmit}>
                 Submit
               </Button>
             </Form>
