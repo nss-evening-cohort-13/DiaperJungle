@@ -1,5 +1,8 @@
 import React from 'react';
-import { Table, Button } from 'react-bootstrap';
+import {
+  Table,
+//   Button
+} from 'react-bootstrap';
 import cartData from '../helpers/data/cartData';
 
 export default class CartCard extends React.Component {
@@ -23,12 +26,12 @@ export default class CartCard extends React.Component {
             <td>{i.units}</td>
             <td>${i.price * i.units}</td>
             <td>
-              <Button
+              {/* <Button
                 className='btn-danger'
                 id={i.id}
                 onClick={(e) => this.deleteCart(e, cart.id)}>
                 X
-              </Button>
+              </Button> */}
             </td>
           </tr>);
     }
@@ -57,7 +60,7 @@ export default class CartCard extends React.Component {
             </tbody>
             </Table>
             <h3 className="cart-total">Cart Total: ${renderTotal}</h3>
-            <Button variant="outline-info">Checkout</Button>
+            {/* <Button variant="outline-info">Checkout</Button> */}
         </div>
     );
   }
