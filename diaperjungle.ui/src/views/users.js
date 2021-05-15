@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import userData from '../helpers/data/userData';
 
 export default class Users extends React.Component {
@@ -19,25 +20,15 @@ export default class Users extends React.Component {
   };
 
   render() {
-    const { users } = this.state;
-
-    const userInfo = (user) => (
-      <div>
-        <h2>{user.first_name} {user.last_name}</h2>
-        <h3>Username: {user.username}</h3>
-        <h3>Password: {user.password}</h3>
-        <h3>Payment Id: {user.payment_id}</h3>
-        <h3>Date Created: {user.date_created}</h3>
-        <div>---------------------------------</div>
-      </div>
-    );
-
-    const printToDom = users.map(userInfo);
+    const { userTable, user } = this.props;
 
     return (
       <>
-        <h1>User Info</h1>
-        {printToDom}
+      <div>
+      <h1>{userTable.first_name} {userTable.last_name}</h1>
+      <Link className='btn btn-primary m-2' to={`/orders/${user.uid}`}>View Orders</Link>{' '}
+      <Link className='btn btn-primary m-2' to={'/payment_type'}>Manage Payments</Link>{' '}
+      </div>
       </>
     );
   }
