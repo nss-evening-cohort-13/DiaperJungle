@@ -5,11 +5,13 @@ const cartUrl = `${baseUrl}/order_product`;
 
 const addToOrderProduct = (data) => new Promise((resolve, reject) => {
   const objData = data;
+  console.warn('data passed to add to cart', objData);
   const newObj = {
     order_id: objData.order.id,
     product_id: objData.products.id,
     price: objData.products.price,
-    quantity: 1
+    units: 1,
+    product_desc: objData.products.title
   };
   axios.post(`${cartUrl}`, newObj)
     .then(resolve)
@@ -22,4 +24,6 @@ const getUserCart = (fbUid) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export default { addToOrderProduct, getUserCart };
+const removeFromCart = (Id) => axios.delete(`${cartUrl}/${Id}`);
+
+export default { addToOrderProduct, getUserCart, removeFromCart };

@@ -1,10 +1,11 @@
 import React from 'react';
-import CartCard from '../components/cartCard';
+import CartCard from '../components/cartCard2';
 import cartData from '../helpers/data/cartData';
 
 class Cart extends React.Component {
     state = {
       order: this.props.order,
+      user: this.props.user,
     };
 
     componentDidMount() {
@@ -22,8 +23,7 @@ class Cart extends React.Component {
     render() {
       return (
             <>
-              <h2>The Cart</h2>
-              <CartCard />
+          <CartCard cart={this.state.cart} user={this.state.user}/>
             </>
       );
     }

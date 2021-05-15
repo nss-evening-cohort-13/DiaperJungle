@@ -42,7 +42,7 @@ namespace DiaperJungle.DataAccess
         {
             using var db = new SqlConnection(ConnectionString);
 
-            var sql = @"Select *
+            var sql = @"Select op.*
                         from Order_Product op
 	                        join Orders o
 	                        ON op.order_id = o.id
@@ -53,7 +53,7 @@ namespace DiaperJungle.DataAccess
 		                                Where u.fb_uid = @fb_uid
 		                                AND o.is_complete = 0";
 
-            return db.Query<Order_Product>(sql).ToList();
+            return db.Query<Order_Product>(sql, new { fb_uid = fb_uid }).ToList();
         }
         
         //Get products from an order
@@ -85,9 +85,9 @@ namespace DiaperJungle.DataAccess
         //Add Product to Order_Product
         public void Add(Order_Product order_product)
         {
-            var sql = @"INSERT INTO [Order_Product] ([order_id], [product_id], [price], [quantity])
+            var sql = @"INSERT INTO [Order_Product] ([order_id], [product_id], [price], [units], [product_desc])
                                                 OUTPUT inserted.id
-                                                VALUES(@order_id, @product_id, @price, @quantity)";
+                                                VALUES(@order_id, @product_id, @price, @units, @product_desc)";
 
             using var db = new SqlConnection(ConnectionString);
 
