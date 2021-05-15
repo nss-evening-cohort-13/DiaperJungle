@@ -182,7 +182,7 @@ class Products extends React.Component {
           Add Products
         </Link>
         <Button variant="warning" onClick={this.clearFilter}>Clear Filter</Button>{' '}
-        <div>
+        <div className='product-cards-container'>
             {productsPage}
         </div>
       </>

@@ -25,7 +25,7 @@ class Home extends React.Component {
       return (
             <>
               <h2>Home</h2>
-              <div>
+              <div className='home-cards-container'>
                 {renderAllProductCards()}
               </div>
             </>

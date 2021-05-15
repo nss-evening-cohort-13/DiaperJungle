@@ -29,7 +29,7 @@ logoutClickEvent = (e) => {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, dbUser } = this.props;
     return (
     <div>
       <Navbar color="dark" expand="lg">
@@ -37,20 +37,22 @@ logoutClickEvent = (e) => {
         <NavbarToggler onClick={this.toggle} className='custom-toggler'/>
         <Collapse isOpen={this.isOpen} navbar>
           <Nav className="link-container mr-auto" navbar>
+          <NavItem>
+              <Link to='/users' className="nav-link m-2" href="#">Profile</Link>
+            </NavItem>
             <NavItem>
               <Link to='/products' className="nav-link m-2" href="#">Diapers</Link>
-            </NavItem>
-            <NavItem>
-              <Link to='/users' className="nav-link m-2" href="#">Users</Link>
-            </NavItem>
-            <NavItem>
-              <Link to='/producttypes' className="nav-link m-2" href="#">Product Types</Link>
             </NavItem>
             <NavItem>
               <Link to='/cart' className="nav-link m-2" href="#">Cart</Link>
             </NavItem>
             <NavItem>
-              <Auth />
+                <Auth />
+            </NavItem>
+            <NavItem>
+              {dbUser.is_admin && user && (
+                <Link to='/admin' className="nav-link m-2" href="#">Admin</Link>
+              )}
             </NavItem>
           </Nav>
           <p className='mr-2 mt-3 text-light'>Search:</p>

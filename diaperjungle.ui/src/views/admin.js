@@ -3,18 +3,17 @@ import { CardGroup } from 'react-bootstrap';
 import orderData from '../helpers/data/orderData';
 import OrderCard from '../components/orderCard';
 
-class Orders extends React.Component {
+export default class Admin extends React.Component {
   state = {
     orders: [],
   };
 
   componentDidMount() {
-    const fbUid = this.props.match.params.id;
-    this.getAllOrderByUser(fbUid);
+    this.getAllTheOrders();
   }
 
-  getAllOrderByUser = (fbUid) => {
-    orderData.getAllCompletedUserOrders(fbUid).then((response) => {
+  getAllTheOrders = () => {
+    orderData.getAllCompletedOrders().then((response) => {
       this.setState({
         orders: response,
       });
@@ -25,15 +24,23 @@ class Orders extends React.Component {
     const { orders } = this.state;
     const renderAllOrderCards = () => orders.map((order) => <OrderCard key={order.id} order={order}/>);
 
+    let orderTotal;
+    if (orders.length !== 0) {
+      let total = 0;
+      orders.forEach((item) => {
+        total += (item.total_cost);
+      });
+      orderTotal = total;
+    }
+
     return (
       <>
-        <h2>Orders</h2>
-        <CardGroup>
+        <h2>Admin</h2>
+        <h2>Total Of All Orders: ${`${orderTotal}`}</h2>
+        <CardGroup className='order-cards-container'>
           {renderAllOrderCards()}
         </CardGroup>
       </>
     );
   }
 }
-
-export default Orders;
