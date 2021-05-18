@@ -1,47 +1,63 @@
 import React from 'react';
 import {
   Table,
-//   Button
+  Button
 } from 'react-bootstrap';
 import cartData from '../helpers/data/cartData';
 
 export default class CartCard extends React.Component {
   state = {
-    carts: this.props.cart
+    order: this.props.order,
+    user: {}
   }
 
-  componentDidMount() { }
+  componentDidMount() {
+    this.getUserCartItems(this.state.order.fb_uid);
+    this.setState({
+      user: this.props.user
+    });
+  }
 
-  deleteCart = (e) => {
-    cartData.removeFromCart(e.target.id, this.props.cart.id);
+  getUserCartItems = (fbUid) => {
+    cartData.getUserCart(fbUid).then((response) => {
+      this.setState({
+        cart: response
+      });
+    });
+  }
+
+  deleteCart = (e, cartId) => {
+    cartData.removeFromCart(e.target.id, cartId).then(() => {
+      this.getUserCartItems(this.state.order.fb_uid);
+    });
   }
 
   render() {
-    const { cart } = this.props;
+    const { cart } = this.state;
     let renderCart;
     if (cart && Object.keys(cart).length !== 0) {
       renderCart = cart.map((i) => <tr key={i.id} >
-            <td><p>{i.product_desc}</p></td>
-            <td>{i.price}</td>
-            <td>{i.units}</td>
-            <td>${i.price * i.units}</td>
-            <td>
-              {/* <Button
+          <td>
+              <Button
                 className='btn-danger'
                 id={i.id}
                 onClick={(e) => this.deleteCart(e, cart.id)}>
                 X
-              </Button> */}
+              </Button>
             </td>
+            <td><p>{i.product_desc}</p></td>
+            <td>{i.price}</td>
+            <td>{i.units}</td>
+            <td>${i.price * i.units}</td>
           </tr>);
     }
     let renderTotal;
     if (cart && Object.keys(cart).length !== 0) {
       let total = 0;
-      this.props.cart.forEach((i) => {
+      this.state.cart.forEach((i) => {
         total += (i.price * i.units);
       });
-      renderTotal = total;
+      renderTotal = total.toFixed(2);
     }
     return (
         <div className="cartSummary">
@@ -49,6 +65,7 @@ export default class CartCard extends React.Component {
             <Table borderless>
                 <thead>
                     <tr>
+                        <th>Remove</th>
                         <th>Item</th>
                         <th>Unit Price</th>
                         <th>Qty</th>
@@ -59,8 +76,13 @@ export default class CartCard extends React.Component {
                 {renderCart}
             </tbody>
             </Table>
-            <h3 className="cart-total">Cart Total: ${renderTotal}</h3>
-            {/* <Button variant="outline-info">Checkout</Button> */}
+            <div className='cartTotal'>
+            {this.state.cart ? <h3>Cart Total: ${renderTotal}</h3> : <h3>Cart Total: $0</h3>}
+                {/* <h3>Cart Total: ${renderTotal}</h3> */}
+                    <div className='checkoutButton'>
+                        <Button variant="outline-info">Checkout</Button>
+                    </div>
+            </div>
         </div>
     );
   }
