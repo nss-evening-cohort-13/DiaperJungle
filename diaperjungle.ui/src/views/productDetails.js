@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
+import { Dropdown } from 'react-bootstrap';
 import Modal from '../components/modal';
 import ProductForm from './productUpdateForm';
 import productData from '../helpers/data/productData';
@@ -8,6 +9,7 @@ import cartData from '../helpers/data/cartData';
 
 class ProductDetails extends Component {
     state = {
+      units: [1, 2, 3, 4, 5],
       products: {},
       order: this.props.order,
       user: {}
@@ -53,7 +55,24 @@ class ProductDetails extends Component {
                   </Modal>
                 )}
                 {this.props.user && (
+                  <>
                   <Button color="success" onClick={this.addToCart}>Add To Cart</Button>
+                  <div>
+                    <Dropdown>
+                      <Dropdown.Toggle variant='secondary' id='dropdown-basic'>
+                        Quantity
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                      <Dropdown.Item value='1'>1</Dropdown.Item>
+                      <Dropdown.Item value='1'>2</Dropdown.Item>
+                      <Dropdown.Item value='1'>3</Dropdown.Item>
+                      <Dropdown.Item value='1'>4</Dropdown.Item>
+                      <Dropdown.Item value='1'>5</Dropdown.Item>
+                </Dropdown.Menu>
+                </Dropdown>
+                </div>
+            </>
                 )}
             </div>
       );
