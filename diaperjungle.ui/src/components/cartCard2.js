@@ -55,15 +55,7 @@ export default class CartCard extends React.Component {
             </td>
             <td><p>{i.product_desc}</p></td>
             <td>{i.price}</td>
-            {<select value={i.units} onChange={this.handleChange}>
-                <option value="N/A">{i.units}</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>}
-            {/* <td>{i.units}</td> */}
+            <td>{i.units}</td>
             <td>${i.price * i.units}</td>
           </tr>);
     }

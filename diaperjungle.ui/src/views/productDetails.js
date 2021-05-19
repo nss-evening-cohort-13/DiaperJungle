@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
-import { Dropdown } from 'react-bootstrap';
 import Modal from '../components/modal';
 import ProductForm from './productUpdateForm';
 import productData from '../helpers/data/productData';
@@ -9,7 +8,7 @@ import cartData from '../helpers/data/cartData';
 
 class ProductDetails extends Component {
     state = {
-      units: [1, 2, 3, 4, 5],
+      units: [],
       products: {},
       order: this.props.order,
       user: {}
@@ -36,7 +35,15 @@ class ProductDetails extends Component {
 
     addToCart = (e) => {
       e.preventDefault();
-      cartData.addToOrderProduct(this.state);
+      cartData.addToOrderProduct(this.state).then(() => {
+        this.props.history.goBack();
+      });
+    }
+
+    handleChange = (e) => {
+      this.setState({
+        [e.target.name]: parseInt(e.target.value, 10)
+      });
     }
 
     render() {
@@ -57,21 +64,34 @@ class ProductDetails extends Component {
                 {this.props.user && (
                   <>
                   <Button color="success" onClick={this.addToCart}>Add To Cart</Button>
-                  <div>
-                    <Dropdown>
-                      <Dropdown.Toggle variant='secondary' id='dropdown-basic'>
-                        Quantity
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu>
-                      <Dropdown.Item value='1'>1</Dropdown.Item>
-                      <Dropdown.Item value='1'>2</Dropdown.Item>
-                      <Dropdown.Item value='1'>3</Dropdown.Item>
-                      <Dropdown.Item value='1'>4</Dropdown.Item>
-                      <Dropdown.Item value='1'>5</Dropdown.Item>
-                </Dropdown.Menu>
-                </Dropdown>
-                </div>
+                    <select type='number' value={this.state.products.units} name='units' onChange={this.handleChange} required>
+                      <option value='' disabled selected hidden>Quantity</option>
+                      <option
+                        type='number'
+                        name='units'
+                        value='1'
+                        onChange={this.handleChange}>1</option>
+                        <option
+                        type='number'
+                        name='units'
+                        value='2'
+                        onChange={this.handleChange}>2</option>
+                        <option
+                        type='number'
+                        name='units'
+                        value='3'
+                        onChange={this.handleChange}>3</option>
+                        <option
+                        type='number'
+                        name='units'
+                        value='4'
+                        onChange={this.handleChange}>4</option>
+                        <option
+                        type='number'
+                        name='units'
+                        value='5'
+                        onChange={this.handleChange}>5</option>
+              </select>
             </>
                 )}
             </div>
