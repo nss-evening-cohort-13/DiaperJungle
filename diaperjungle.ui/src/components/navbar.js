@@ -47,7 +47,7 @@ logoutClickEvent = (e) => {
               <Link to='/cart' className="nav-link m-2" href="#">Cart</Link>
             </NavItem>
             <NavItem>
-                <Auth />
+                <Auth user={user}/>
             </NavItem>
             <NavItem>
               {dbUser.is_admin && user && (
