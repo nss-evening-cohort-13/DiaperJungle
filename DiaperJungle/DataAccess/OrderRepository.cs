@@ -27,9 +27,9 @@ namespace DiaperJungle.DataAccess
         //Adds an order
         public void Add(Order order)
         {
-            var sql = @"INSERT INTO [Orders] ([pay_type], [total_cost], [user_id], [is_complete])
+            var sql = @"INSERT INTO [Orders] ([user_id], [is_complete])
                         OUTPUT INSERTED.id 
-                        VALUES(@pay_type, @total_cost, @user_id, @is_complete)";
+                        VALUES(@user_id, @is_complete)";
 
             using var db = new SqlConnection(ConnectionString);
             var orderId = db.ExecuteScalar<int>(sql, order);
@@ -124,6 +124,20 @@ namespace DiaperJungle.DataAccess
                         Where o.is_complete = 1";
 
             return db.Query<DetailedOrder>(sql).ToList();
+        }
+
+        //Update and complete orders
+        public void Update(Order order)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"UPDATE [Orders]
+                        SET pay_type = @pay_type,
+                        total_cost = @total_cost,
+                        is_complete = @is_complete
+                      WHERE id = @id";
+
+            db.Execute(sql, order);
         }
     }
 }

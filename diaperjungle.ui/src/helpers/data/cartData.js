@@ -5,7 +5,6 @@ const cartUrl = `${baseUrl}/order_product`;
 
 const addToOrderProduct = (data) => new Promise((resolve, reject) => {
   const objData = data;
-  console.warn('data passed to add to cart', objData);
   const newObj = {
     order_id: objData.order.id,
     product_id: objData.products.id,
