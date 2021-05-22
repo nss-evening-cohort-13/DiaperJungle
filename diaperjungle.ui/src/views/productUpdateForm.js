@@ -10,7 +10,7 @@ class ProductUpdateForm extends Component {
     state = {
       productType: [],
       animalType: [],
-      animal_type_id: this.props.products?.animal_type_idnpm,
+      animal_type_id: this.props.products?.animal_type_id || '',
       description: this.props.products?.description || '',
       id: this.props.products?.id || '',
       image_url: this.props.products?.image_url || '',

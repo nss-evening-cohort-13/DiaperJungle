@@ -54,6 +54,18 @@ const getAllCompletedOrders = () => new Promise((resolve, reject) => {
 // Deletes a single order base on id and remove it
 const deleteOrders = (Id) => axios.delete(`${OrdersUrl}/${Id}`);
 
+const completeOrder = (data) => new Promise((resolve, reject) => {
+  console.warn('Completed order data being passed', data);
+  const newObj = {
+    pay_type: data.id,
+    total_cost: data.orderTotal,
+    is_complete: true,
+  };
+  axios.patch(`${OrdersUrl}/${data.order.id}/update`, newObj)
+    .then(resolve)
+    .catch((error) => reject(error));
+});
+
 export default {
   getAllOrders,
   deleteOrders,
@@ -62,4 +74,5 @@ export default {
   getNotCompletedOrders,
   getSingleOrder,
   getAllCompletedOrders,
+  completeOrder
 };
