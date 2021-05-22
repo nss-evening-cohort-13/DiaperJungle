@@ -16,7 +16,7 @@ export default class PaymentTypeForm extends React.Component {
   };
 
   componentDidMount() {
-    this.getAllOfThePaymentTypes();
+    this.getAllOfThePaymentTypes(this.state.user_id);
   }
 
   handleChange = (e) => {
@@ -25,8 +25,8 @@ export default class PaymentTypeForm extends React.Component {
     });
   }
 
-  getAllOfThePaymentTypes = () => {
-    paymentTypeData.getAllPaymentTypes().then((response) => {
+  getAllOfThePaymentTypes = (uid) => {
+    paymentTypeData.getPaymentTypesByUid(uid).then((response) => {
       this.setState({
         paymentTypes: response,
       });
@@ -41,7 +41,7 @@ export default class PaymentTypeForm extends React.Component {
 
   removePaymentType = (id) => {
     paymentTypeData.deletePaymentType(id).then(() => {
-      this.getAllOfThePaymentTypes();
+      this.getAllOfThePaymentTypes(this.state.user_id);
     });
   };
 
@@ -51,7 +51,7 @@ export default class PaymentTypeForm extends React.Component {
       addPay: false,
     });
     paymentTypeData.addPaymentType(this.state).then(() => {
-      this.getAllOfThePaymentTypes();
+      this.getAllOfThePaymentTypes(this.state.user_id);
     });
   }
 

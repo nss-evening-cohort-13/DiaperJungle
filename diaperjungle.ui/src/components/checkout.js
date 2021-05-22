@@ -14,11 +14,11 @@ export default class Checkout extends Component {
   }
 
   componentDidMount() {
-    this.getAllOfThePaymentTypes();
+    this.getAllOfThePaymentTypes(this.state.order.user_id);
   }
 
-  getAllOfThePaymentTypes = () => {
-    paymentTypeData.getAllPaymentTypes().then((response) => {
+  getAllOfThePaymentTypes = (id) => {
+    paymentTypeData.getPaymentTypesByUid(id).then((response) => {
       this.setState({
         paymentTypes: response,
       });

@@ -16,6 +16,17 @@ const addPaymentType = (data) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
+const getPaymentTypesByUid = (Uid) => new Promise((resolve, reject) => {
+  axios.get(`${paymentTypeUrl}/userpayments/${Uid}`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
 const deletePaymentType = (Id) => axios.delete(`${paymentTypeUrl}/${Id}`);
 
-export default { getAllPaymentTypes, deletePaymentType, addPaymentType };
+export default {
+  getAllPaymentTypes,
+  deletePaymentType,
+  addPaymentType,
+  getPaymentTypesByUid,
+};
