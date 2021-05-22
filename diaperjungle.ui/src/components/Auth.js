@@ -27,11 +27,16 @@ export default class Auth extends Component {
   };
 
   render() {
+    const { user } = this.props;
     return (
       // <Button outline color="info" className="btn" onClick={this.loginClickEvent}>
       //  Sign In
       // </Button>
-      <Link to='null' className="nav-link m-2" href="#" onClick={this.loginClickEvent}>Login</Link>
+      <>
+        {!user && (
+          <Link to='null' className="nav-link m-2" href="#" onClick={this.loginClickEvent}>Login</Link>
+        )}
+      </>
     );
   }
 }
