@@ -24,7 +24,13 @@ class Home extends React.Component {
       const renderAllProductCards = () => products.map((product) => <ProductCard key={product.id} product={product} />);
       return (
             <>
-              <h2>Home</h2>
+              <div className="jumbotron jumbotron-fluid">
+                <div className="container">
+                  <h1 className="display-4">Welcome to Diaper Jungle</h1>
+                  <hr className="my-4"/>
+                  <p className="lead">Your one-stop shop for all your non-human diaper needs. A variety of colors, team logos and environmentally friendly materials are available. Any animal, any size. We&#39;ve got your back... end</p>
+                </div>
+              </div>
               <div className='home-cards-container'>
                 {renderAllProductCards()}
               </div>
