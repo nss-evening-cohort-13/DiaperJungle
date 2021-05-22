@@ -2,8 +2,10 @@
 @import 'productCard';
 @import 'cart';
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
 
 body {
+  font-family: 'Playfair Display', serif;
   background-image: url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gh-diaper-sizing-index-1594073775.jpg);
   min-height: 100%;
   min-width: 100%;
