@@ -55,7 +55,6 @@ const getAllCompletedOrders = () => new Promise((resolve, reject) => {
 const deleteOrders = (Id) => axios.delete(`${OrdersUrl}/${Id}`);
 
 const completeOrder = (data) => new Promise((resolve, reject) => {
-  console.warn('Completed order data being passed', data);
   const newObj = {
     pay_type: data.id,
     total_cost: data.orderTotal,

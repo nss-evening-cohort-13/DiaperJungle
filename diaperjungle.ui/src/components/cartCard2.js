@@ -25,7 +25,6 @@ export default class CartCard extends React.Component {
 
   getUserCartItems = (fbUid) => {
     cartData.getUserCart(fbUid).then((response) => {
-      console.warn('cart response', response);
       this.setState({
         cart: response
       });
@@ -104,8 +103,8 @@ export default class CartCard extends React.Component {
             </tbody>
             </Table>
             <div className='cartTotal'>
-            {this.state.cart !== undefined ? <h3>Cart Total: ${renderTotal}</h3> : <h3>Cart Total: $0</h3>}
-             {this.state.cart !== undefined ? <Modal title={'Checkout'} buttonLabel={'Checkout'}>
+            {this.state.cart?.length ? <h3>Cart Total: ${renderTotal}</h3> : <h3>Cart Total: $0</h3>}
+             {this.state.cart?.length ? <Modal title={'Checkout'} buttonLabel={'Checkout'}>
                     {<Checkout cart={this.state.cart} order={this.state.order} orderTotal={this.state.orderTotal} />}
                   </Modal> : <div></div>}
             </div>
