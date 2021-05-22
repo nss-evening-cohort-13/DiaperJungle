@@ -65,7 +65,7 @@ export default class Admin extends React.Component {
       orders.forEach((item) => {
         total += (item.total_cost);
       });
-      orderTotal = total;
+      orderTotal = total.toFixed(2);
     }
 
     return (

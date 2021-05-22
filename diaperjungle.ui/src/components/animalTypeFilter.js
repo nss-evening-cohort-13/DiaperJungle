@@ -32,7 +32,7 @@ export default class AnimalTypeFilter extends React.Component {
     return (
       <div>
         <Dropdown>
-          <Dropdown.Toggle variant='success' id='dropdown-basic'>
+          <Dropdown.Toggle variant='primary' id='dropdown-basic'>
           {this.state.animalName}
           </Dropdown.Toggle>
 
