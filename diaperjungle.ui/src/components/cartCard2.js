@@ -32,6 +32,14 @@ export default class CartCard extends React.Component {
     });
   }
 
+  handleChange = (e) => {
+    this.setState((prevState) => {
+      const cart = { ...prevState.cart };
+      cart.units = e.target.value;
+      return { cart };
+    });
+  }
+
   render() {
     const { cart } = this.state;
     let renderCart;

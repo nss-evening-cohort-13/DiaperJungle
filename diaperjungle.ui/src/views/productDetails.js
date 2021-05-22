@@ -8,6 +8,7 @@ import cartData from '../helpers/data/cartData';
 
 class ProductDetails extends Component {
     state = {
+      units: [],
       products: {},
       order: this.props.order,
       user: {}
@@ -34,7 +35,15 @@ class ProductDetails extends Component {
 
     addToCart = (e) => {
       e.preventDefault();
-      cartData.addToOrderProduct(this.state);
+      cartData.addToOrderProduct(this.state).then(() => {
+        this.props.history.goBack();
+      });
+    }
+
+    handleChange = (e) => {
+      this.setState({
+        [e.target.name]: parseInt(e.target.value, 10)
+      });
     }
 
     render() {
@@ -53,7 +62,37 @@ class ProductDetails extends Component {
                   </Modal>
                 )}
                 {this.props.user && (
+                  <>
                   <Button color="success" onClick={this.addToCart}>Add To Cart</Button>
+                    <select type='number' value={this.state.products.units} name='units' onChange={this.handleChange} required>
+                      <option value='' disabled selected hidden>Quantity</option>
+                      <option
+                        type='number'
+                        name='units'
+                        value='1'
+                        onChange={this.handleChange}>1</option>
+                        <option
+                        type='number'
+                        name='units'
+                        value='2'
+                        onChange={this.handleChange}>2</option>
+                        <option
+                        type='number'
+                        name='units'
+                        value='3'
+                        onChange={this.handleChange}>3</option>
+                        <option
+                        type='number'
+                        name='units'
+                        value='4'
+                        onChange={this.handleChange}>4</option>
+                        <option
+                        type='number'
+                        name='units'
+                        value='5'
+                        onChange={this.handleChange}>5</option>
+              </select>
+            </>
                 )}
             </div>
       );

@@ -10,7 +10,7 @@ const addToOrderProduct = (data) => new Promise((resolve, reject) => {
     order_id: objData.order.id,
     product_id: objData.products.id,
     price: objData.products.price,
-    units: 1,
+    units: objData.units,
     product_desc: objData.products.title
   };
   axios.post(`${cartUrl}`, newObj)
