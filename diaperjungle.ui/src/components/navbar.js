@@ -48,7 +48,9 @@ logoutClickEvent = (e) => {
               <Link to='/products' className="nav-link m-2" href="#">Diapers</Link>
             </NavItem>
             <NavItem>
+            {user && (
               <Link to='/cart' className="nav-link m-2" href="#">Cart</Link>
+            )}
             </NavItem>
             <NavItem>
                 <Auth user={user}/>
