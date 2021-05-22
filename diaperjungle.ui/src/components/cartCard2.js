@@ -3,12 +3,14 @@ import {
   Table,
   Button
 } from 'react-bootstrap';
+import Checkout from './checkout';
+import Modal from './modal';
 import cartData from '../helpers/data/cartData';
 
 export default class CartCard extends React.Component {
   state = {
     order: this.props.order,
-    user: {}
+    user: {},
   }
 
   componentDidMount() {
@@ -16,10 +18,14 @@ export default class CartCard extends React.Component {
     this.setState({
       user: this.props.user
     });
+    setTimeout(() => {
+      this.addTotalToState();
+    }, 1000);
   }
 
   getUserCartItems = (fbUid) => {
     cartData.getUserCart(fbUid).then((response) => {
+      console.warn('cart response', response);
       this.setState({
         cart: response
       });
@@ -37,6 +43,17 @@ export default class CartCard extends React.Component {
       const cart = { ...prevState.cart };
       cart.units = e.target.value;
       return { cart };
+    });
+  }
+
+  addTotalToState = () => {
+    let total = 0;
+    this.state.cart.forEach((i) => {
+      total += (i.price * i.units);
+    });
+    const renderTotal = total.toFixed(2);
+    this.setState({
+      orderTotal: Number(renderTotal)
     });
   }
 
@@ -65,7 +82,9 @@ export default class CartCard extends React.Component {
       this.state.cart.forEach((i) => {
         total += (i.price * i.units);
       });
+      // renderTotal = this.setState({ orderTotal: total.toFixed(2) });
       renderTotal = total.toFixed(2);
+      // this.setState({ orderTotal: renderTotal });
     }
     return (
         <div className="cartSummary">
@@ -85,11 +104,10 @@ export default class CartCard extends React.Component {
             </tbody>
             </Table>
             <div className='cartTotal'>
-            {this.state.cart ? <h3>Cart Total: ${renderTotal}</h3> : <h3>Cart Total: $0</h3>}
-                {/* <h3>Cart Total: ${renderTotal}</h3> */}
-                    <div className='checkoutButton'>
-                        <Button variant="outline-info">Checkout</Button>
-                    </div>
+            {this.state.cart !== undefined ? <h3>Cart Total: ${renderTotal}</h3> : <h3>Cart Total: $0</h3>}
+             {this.state.cart !== undefined ? <Modal title={'Checkout'} buttonLabel={'Checkout'}>
+                    {<Checkout cart={this.state.cart} order={this.state.order} orderTotal={this.state.orderTotal} />}
+                  </Modal> : <div></div>}
             </div>
         </div>
     );

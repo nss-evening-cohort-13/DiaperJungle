@@ -88,5 +88,19 @@ namespace DiaperJungle.Controllers
         {
             return Ok(_repo.GetAllCompleted());
         }
+
+        //Update
+        [HttpPatch("{id}/update")]
+        public IActionResult UpdateUser(int id, Order orderObj)
+        {
+            var order = _repo.Get(id);
+
+            order.pay_type = orderObj.pay_type;
+            order.total_cost = orderObj.total_cost;
+            order.is_complete = orderObj.is_complete;           
+            
+            _repo.Update(order);
+            return NoContent();
+        }
     }
 }
