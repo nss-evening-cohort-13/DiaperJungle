@@ -50,7 +50,6 @@ export default class PaymentTypeForm extends React.Component {
     this.setState({
       addPay: false,
     });
-    console.warn(this.state);
     paymentTypeData.addPaymentType(this.state).then(() => {
       this.getAllOfThePaymentTypes(this.state.user_id);
     });

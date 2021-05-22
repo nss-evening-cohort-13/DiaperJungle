@@ -1,5 +1,4 @@
 import React from 'react';
-import { CardGroup } from 'react-bootstrap';
 import orderData from '../helpers/data/orderData';
 import OrderCard from '../components/orderCard';
 
@@ -28,9 +27,9 @@ class Orders extends React.Component {
     return (
       <>
         <h2>Orders</h2>
-        <CardGroup>
+        <div className='order-cards-container'>
           {renderAllOrderCards()}
-        </CardGroup>
+        </div>
       </>
     );
   }
