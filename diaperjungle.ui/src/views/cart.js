@@ -6,7 +6,6 @@ class Cart extends React.Component {
     state = {
       order: this.props.order,
       user: this.props.user,
-      cart: []
     };
 
     componentDidMount() {
