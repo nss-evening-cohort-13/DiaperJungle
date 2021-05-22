@@ -29,7 +29,7 @@ body {
   margin-left: 5%;
   margin-right: 5%;
 }
-.home-header{
+.home-header {
   margin: 20px;
 }
 
@@ -41,10 +41,19 @@ body {
   margin-right: 5%;
 }
 
-.single-order-cards{
+.single-order-cards {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.cartSummary {
+  background-color:  white;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
   margin-left: 5%;
   margin-right: 5%;
 }

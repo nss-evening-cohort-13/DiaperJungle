@@ -178,10 +178,10 @@ class Products extends React.Component {
         <div>
         <AnimalTypeFilter animalTypeData={this.animalData}/>
         </div>
-        <Link className='btn btn-info' to={'product-form'}>
+        <Link className='btn btn-primary' to={'product-form'}>
           Add Products
         </Link>
-        <Button variant="warning" onClick={this.clearFilter}>Clear Filter</Button>{' '}
+        <Button variant="primary" onClick={this.clearFilter}>Clear Filter</Button>{' '}
         <div className='product-cards-container'>
             {productsPage}
         </div>
