@@ -53,8 +53,10 @@ class ProductDetails extends Component {
                 <h1>This is the single product view</h1>
                 <h2>{products.title}</h2>
                 <h3>{products.description}</h3>
-                <Button color="danger" onClick={this.removeProducts}>Delete</Button>{' '}
-                {(
+                {this.props.user && (
+                  <Button color="danger" onClick={this.removeProducts}>Delete</Button>
+                )}
+                {this.props.user && (
                   <Modal title={'Update Product'} buttonLabel={'Update Product'}>
                     {Object.keys(products).length && (
                       <ProductForm products={products} onUpdate={this.getASingleProduct} />
