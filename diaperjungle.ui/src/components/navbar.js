@@ -39,8 +39,10 @@ logoutClickEvent = (e) => {
         <NavbarToggler onClick={this.toggle} className='custom-toggler'/>
         <Collapse isOpen={this.isOpen} navbar>
           <Nav className="link-container mr-auto" navbar>
-          <NavItem>
-              <Link to='/users' className="nav-link m-2" href="#">Profile</Link>
+            <NavItem>
+              {user && (
+                <Link to='/users' className="nav-link m-2" href="#">Profile</Link>
+              )}
             </NavItem>
             <NavItem>
               <Link to='/products' className="nav-link m-2" href="#">Diapers</Link>

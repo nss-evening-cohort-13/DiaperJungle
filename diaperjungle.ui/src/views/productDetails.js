@@ -50,7 +50,6 @@ class ProductDetails extends Component {
       const { products } = this.state;
       return (
             <div className='single-product-view'>
-                <h1>This is the single product view</h1>
                 <h2>{products.title}</h2>
                 <h3>{products.description}</h3>
                 {this.props.user && (
