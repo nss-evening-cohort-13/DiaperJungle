@@ -33,7 +33,9 @@ logoutClickEvent = (e) => {
     return (
     <div>
       <Navbar color="dark" expand="lg">
-        <NavbarBrand className='gradient-text' href="/">Diaper Jungle</NavbarBrand>
+        <NavbarBrand className='gradient-text'>
+          <Link to='/' className='nav-link' href='#'>Diaper Jungle</Link>
+        </NavbarBrand>
         <NavbarToggler onClick={this.toggle} className='custom-toggler'/>
         <Collapse isOpen={this.isOpen} navbar>
           <Nav className="link-container mr-auto" navbar>
